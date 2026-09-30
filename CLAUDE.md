@@ -17,6 +17,7 @@ yarn test:e2e        # Playwright headless E2E (run `yarn playwright install` on
 yarn lint            # ESLint (src, e2e)
 yarn format:check    # Prettier check
 python3 scripts/build_words.py  # refresh the word list from NYT history
+python3 -m unittest discover scripts  # build-script tests (also run in CI)
 ```
 
 ## Architecture
@@ -38,6 +39,8 @@ python3 scripts/build_words.py  # refresh the word list from NYT history
   into `scripts/.cache/` (gitignored; first run backfills ~2,200 nytbee pages,
   about 45 min), prints the backtest, and rewrites `words.ts`. `--backtest`
   evaluates without writing; `--no-fetch` uses the cache only.
+  Every source and the output are checked against `^[a-z]+$`; the build stops
+  on anything else, since words land in a JS template literal.
 - **Logic:** `src/lib/spellingBee.ts` — `findWords`, `isPangram` (needs all
   seven letters entered, so partial input shows no pangrams), `scoreWord` (NYT scoring: 4-letter = 1, else length, +7
   pangram bonus), `buildLetterGrid`, `buildPrefixCounts`.

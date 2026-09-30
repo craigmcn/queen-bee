@@ -9,6 +9,12 @@ Enter the puzzle's center letter and six outer letters to see:
 - a two-letter list of how many words start with each two-letter prefix
 - a "Hints only" toggle that hides the word list so you can hunt with just the hints
 
+## Word list
+
+Built from ~2,900 past NYT Spelling Bee puzzles: words NYT accepted the last
+time they fit a puzzle, plus untested words from the ENABLE word list. Refresh
+it with `python3 scripts/build_words.py`.
+
 ## Development
 
 ```bash

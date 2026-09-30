@@ -35,3 +35,8 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# word-list build
+scripts/.cache
+.venv
+__pycache__

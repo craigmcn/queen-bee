@@ -6,7 +6,7 @@ export default defineConfig({
   base: "./",
   plugins: [react()],
   build: {
-    // The bundled ~35k-word list alone is ~280 kB (~170 kB gzipped); it's
+    // The bundled ~37k-word list alone is ~300 kB (~180 kB gzipped); it's
     // needed on first render, so splitting it out wouldn't help.
     chunkSizeWarningLimit: 600,
   },

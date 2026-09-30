@@ -10,7 +10,7 @@ Vite 8, TypeScript 6 (strict); tooling mirrors `wordle-helper`.
 ```bash
 yarn dev             # dev server (http://localhost:3180)
 yarn build           # tsc -b + production build → dist/
-yarn build:netlify   # dual build: netlify/ (root) + netlify/queen-bee/ (GH Pages)
+yarn build:netlify   # dual build: netlify/ (root) + netlify/queen-bee/ (craigmcn.com/queen-bee/)
 yarn test            # vitest watch mode
 yarn test:coverage   # vitest run --coverage
 yarn test:e2e        # Playwright headless E2E (run `yarn playwright install` once first)
@@ -38,8 +38,8 @@ python3 scripts/build_words.py  # refresh the word list from NYT history
   into `scripts/.cache/` (gitignored; first run backfills ~2,200 nytbee pages,
   about 45 min), prints the backtest, and rewrites `words.ts`. `--backtest`
   evaluates without writing; `--no-fetch` uses the cache only.
-- **Logic:** `src/lib/spellingBee.ts` — `findWords`, `isPangram` (uses every
-  entered letter), `scoreWord` (NYT scoring: 4-letter = 1, else length, +7
+- **Logic:** `src/lib/spellingBee.ts` — `findWords`, `isPangram` (needs all
+  seven letters entered, so partial input shows no pangrams), `scoreWord` (NYT scoring: 4-letter = 1, else length, +7
   pangram bonus), `buildLetterGrid`, `buildPrefixCounts`.
 - **UI:** `src/App.tsx` owns the two letter inputs; entering a letter as the
   center removes it from the outer letters, and outer letters are de-duplicated
@@ -51,3 +51,11 @@ python3 scripts/build_words.py  # refresh the word list from NYT history
   also provides light/dark theming through `light-dark()` tokens. App CSS only
   adds layout and the Spelling Bee yellow (`src/index.css`), which keeps dark
   text in both schemes.
+- **Deployment:** Netlify at https://remarkable-kleicha-f95610.netlify.app/,
+  configured in `netlify.toml` (`yarn build:netlify`,
+  publish dir `netlify`). The `netlify/queen-bee/` copy is built with base
+  `/queen-bee/` for the craigmcn.com subfolder. No GitHub Pages.
+
+## Open TODOs
+
+Tracked as issues in the [queen-bee GitHub Project](https://github.com/users/craigmcn/projects/21).

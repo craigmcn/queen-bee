@@ -31,6 +31,9 @@ jobs:
 
       - run: yarn test:coverage
 
+      - name: Test word-list build script
+        run: python3 -m unittest discover scripts
+
       - name: Cache Playwright browsers
         id: playwright-cache
         uses: actions/cache@v6

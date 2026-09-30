@@ -40,6 +40,13 @@ describe("App", () => {
     expect(text.every((w) => w?.includes("t"))).toBe(true);
   });
 
+  it("doesn't highlight pangrams until all seven letters are entered", async () => {
+    await enterLetters("t", "acre");
+
+    expect(screen.getByText(/0 pangrams/)).toBeInTheDocument();
+    expect(screen.queryByText(/\(pangram\)/)).not.toBeInTheDocument();
+  });
+
   it("keeps the center letter out of the outer letters and caps them at six", async () => {
     await enterLetters("t", "tabcdefgh");
     expect(screen.getByLabelText("Outer letters")).toHaveValue("abcdef");

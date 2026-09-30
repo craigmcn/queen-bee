@@ -17,11 +17,11 @@ import json
 import re
 import subprocess
 import textwrap
-from collections import defaultdict
-from itertools import combinations
 import time
 import urllib.error
 import urllib.request
+from collections import defaultdict
+from itertools import combinations
 from pathlib import Path
 
 
@@ -33,6 +33,8 @@ TED_REPO = "https://github.com/tedmiston/spelling-bee-answers.git"
 NYTBEE_URL = "https://nytbee.com/Bee_{:%Y%m%d}.html"
 FIRST_DAY = datetime.date(2018, 5, 9)
 HOLDOUT_DAYS = 365
+RECENT_DAYS = datetime.timedelta(days=2)
+RETRY = object()
 
 
 def fetch_sources():
@@ -48,14 +50,21 @@ def fetch_sources():
         subprocess.run(["git", "clone", "-q", "--depth", "1", TED_REPO, ted], check=True)
 
     # nytbee.com fills the gaps tedmiston's archive (2023-01 to 2025-03)
-    # doesn't cover. Each day is cached, and "null" marks a missing page.
+    # doesn't cover. Each day is cached, and "null" marks a missing page. A
+    # recent day may just not be posted yet, so its miss isn't cached.
     have = {p.stem for p in (ted / "days").glob("*.json")}
     day, today = FIRST_DAY, datetime.date.today()
     while day <= today:
         out = CACHE / "nytbee" / f"{day.isoformat()}.json"
         if day.isoformat() not in have and not out.exists():
-            out.parent.mkdir(exist_ok=True)
-            json.dump(fetch_nytbee_day(day), out.open("w"))
+            try:
+                answers = fetch_nytbee_day(day)
+            except OSError as error:
+                print(f"{day}: {error}; will retry next run")
+                answers = RETRY
+            if answers is not RETRY and (answers or today - day > RECENT_DAYS):
+                out.parent.mkdir(exist_ok=True)
+                json.dump(answers, out.open("w"))
             time.sleep(0.4)
         day += datetime.timedelta(days=1)
 
@@ -64,10 +73,14 @@ def fetch_nytbee_day(day):
     req = urllib.request.Request(
         NYTBEE_URL.format(day), headers={"User-Agent": "queen-bee word-list builder"}
     )
+    # Only a 404 means the page doesn't exist; other errors (429, 503,
+    # network) propagate so the caller retries instead of caching a miss.
     try:
         html = urllib.request.urlopen(req, timeout=30).read().decode()
-    except urllib.error.HTTPError:
-        return None
+    except urllib.error.HTTPError as error:
+        if error.code == 404:
+            return None
+        raise
     # Pages before 2020 have no id; their official answers are the first list.
     start = html.find('id="main-answer-list"')
     if start < 0:

@@ -53,15 +53,20 @@ describe("findWords", () => {
 });
 
 describe("isPangram / scoreWord", () => {
-  it("detects words using every letter", () => {
-    expect(isPangram("crater", "acert")).toBe(true);
-    expect(isPangram("care", "acert")).toBe(false);
+  it("detects words using all seven letters", () => {
+    expect(isPangram("central", "tacreln")).toBe(true);
+    expect(isPangram("crater", "tacreln")).toBe(false);
+  });
+
+  it("finds no pangrams until all seven letters are entered", () => {
+    expect(isPangram("crater", "acert")).toBe(false);
   });
 
   it("scores per NYT rules", () => {
-    expect(scoreWord("care", "acertxy")).toBe(1);
-    expect(scoreWord("crate", "acertxy")).toBe(5);
-    expect(scoreWord("crate", "acert")).toBe(12);
+    expect(scoreWord("care", "tacreln")).toBe(1);
+    expect(scoreWord("crate", "tacreln")).toBe(5);
+    expect(scoreWord("central", "tacreln")).toBe(14);
+    expect(scoreWord("crate", "acert")).toBe(5);
   });
 });
 

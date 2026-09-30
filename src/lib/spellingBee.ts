@@ -21,8 +21,13 @@ export function findWords(
   );
 }
 
+// NYT pangrams use all seven letters, so none count until every letter is
+// entered; otherwise partial input would inflate highlights and points.
 export function isPangram(word: string, letters: string): boolean {
-  return [...letters].every((letter) => word.includes(letter));
+  return (
+    letters.length === OUTER_LETTER_COUNT + 1 &&
+    [...letters].every((letter) => word.includes(letter))
+  );
 }
 
 // NYT scoring: 4-letter words are worth 1, longer words 1 per letter, and a

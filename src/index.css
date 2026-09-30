@@ -1,0 +1,8 @@
+/* albertcss (linked in index.html) supplies the base styles and light/dark
+   theme tokens; these add the Spelling Bee yellow, which reads the same in
+   both schemes because its text is always dark. */
+:root {
+  --bee-yellow: #f7da21;
+  --bee-yellow-text: #000;
+  --bee-yellow-border: light-dark(#c9ad00, #f7da21);
+}

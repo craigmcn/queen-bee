@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Queen Bee</title>
+
+    <script>
+      (() =>
+        !window.location.pathname.endsWith("/") &&
+        window.location.replace(window.location.href + "/"))();
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://albertcss.craigmcn.com/v0.18.0/css/albert.min.css"
+      integrity="sha384-VapkNnLS+Lfdo2VSLGprtrPKHlQG++6n4irK5vJvgrF2SiHE1TI/9mTCIy9fBws2"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

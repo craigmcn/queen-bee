@@ -258,6 +258,25 @@ def write_words(words):
     )
 
 
+def read_words():
+    """The words currently in OUTPUT, or an empty set before the first build."""
+    if not OUTPUT.exists():
+        return set()
+    match = re.search(r"`(.*)`", OUTPUT.read_text(), re.S)
+    return set(match.group(1).split()) if match else set()
+
+
+def describe_changes(old, new, limit=50):
+    """A short added/removed summary, used in the refresh PR's description."""
+    added, removed = sorted(new - old), sorted(old - new)
+    lines = [f"words: +{len(added)} -{len(removed)} ({len(new)} total)"]
+    for label, changed in (("added", added), ("removed", removed)):
+        if changed:
+            more = f", ... and {len(changed) - limit} more" if len(changed) > limit else ""
+            lines.append(f"{label}: {', '.join(changed[:limit])}{more}")
+    return "\n".join(lines)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--no-fetch", action="store_true", help="use cached data only")
@@ -274,9 +293,10 @@ def main():
     if args.backtest:
         return
 
+    previous = read_words()
     words = build(puzzles, dictionary)
     write_words(words)
-    print(f"wrote {len(words)} words to {OUTPUT.relative_to(ROOT)}")
+    print(describe_changes(previous, words))
 
 
 if __name__ == "__main__":

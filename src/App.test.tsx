@@ -9,6 +9,8 @@ async function enterLetters(center: string, outer: string) {
   render(<App />);
   await user.type(screen.getByLabelText("Center letter"), center);
   await user.type(screen.getByLabelText("Outer letters"), outer);
+  // The word list loads asynchronously, so wait for results to render.
+  await screen.findByRole("region", { name: /words?$/ });
   return user;
 }
 

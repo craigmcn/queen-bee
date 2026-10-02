@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import { LetterGridTable } from "./components/LetterGridTable";
 import { PrefixList } from "./components/PrefixList";
-import { WORDS } from "./data/words";
+import { useWordList } from "./data/useWordList";
 import {
   OUTER_LETTER_COUNT,
   buildLetterGrid,
@@ -20,7 +20,14 @@ function App() {
   const outerInput = useRef<HTMLInputElement>(null);
 
   const letters = center + outer;
-  const words = useMemo(() => findWords(WORDS, center, outer), [center, outer]);
+  const wordList = useWordList();
+  const words = useMemo(
+    () =>
+      wordList.status === "ready"
+        ? findWords(wordList.words, center, outer)
+        : [],
+    [wordList, center, outer],
+  );
   const pangrams = words.filter((word) => isPangram(word, letters));
   const points = words.reduce((total, w) => total + scoreWord(w, letters), 0);
 
@@ -94,7 +101,19 @@ function App() {
         </button>
       </form>
 
-      {center && (
+      {center && wordList.status === "loading" && (
+        <p className="results-status" role="status">
+          Loading words&hellip;
+        </p>
+      )}
+
+      {center && wordList.status === "error" && (
+        <p className="results-status" role="alert">
+          Couldn&rsquo;t load the word list. Reload the page to try again.
+        </p>
+      )}
+
+      {center && wordList.status === "ready" && (
         <>
           <section className="results" aria-labelledby="results-heading">
             <h2 id="results-heading">

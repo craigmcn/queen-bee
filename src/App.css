@@ -39,6 +39,10 @@
   width: 11rem;
 }
 
+.results-status {
+  color: var(--grey700);
+}
+
 .stats {
   color: var(--grey700);
   margin-top: 0;

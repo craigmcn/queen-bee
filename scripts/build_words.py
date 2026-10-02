@@ -20,7 +20,7 @@ import textwrap
 import time
 import urllib.error
 import urllib.request
-from collections import defaultdict
+from collections import Counter, defaultdict
 from itertools import combinations
 from pathlib import Path
 
@@ -31,11 +31,19 @@ OUTPUT = ROOT / "src" / "data" / "words.ts"
 ENABLE_URL = "https://raw.githubusercontent.com/dolph/dictionary/master/enable1.txt"
 TED_REPO = "https://github.com/tedmiston/spelling-bee-answers.git"
 NYTBEE_URL = "https://nytbee.com/Bee_{:%Y%m%d}.html"
-FIRST_DAY = datetime.date(2018, 5, 9)
+# nytbee's first page with an answer list; earlier ones are 404s or empty.
+FIRST_DAY = datetime.date(2018, 7, 31)
 HOLDOUT_DAYS = 365
 RECENT_DAYS = datetime.timedelta(days=2)
-RETRY = object()
+FAILURE_WINDOW = datetime.timedelta(days=30)
+# nytbee added id="main-answer-list" on this day. Older pages have no id, and
+# their official answers are the first "answer-list" block.
+MAIN_LIST_ID_SINCE = datetime.date(2019, 8, 17)
 WORD = re.compile(r"[a-z]+")
+
+
+class ParseError(Exception):
+    """A nytbee page loaded, but no answer list could be read from it."""
 
 
 def check_words(words, source):
@@ -64,23 +72,53 @@ def fetch_sources():
         subprocess.run(["git", "clone", "-q", "--depth", "1", TED_REPO, ted], check=True)
 
     # nytbee.com fills the gaps tedmiston's archive (2023-01 to 2025-03)
-    # doesn't cover. Each day is cached, and "null" marks a missing page. A
-    # recent day may just not be posted yet, so its miss isn't cached.
+    # doesn't cover. Each day is cached, and "null" marks a missing (404) page.
+    # Nothing else is cached, so errors and unparsed pages are retried.
     have = {p.stem for p in (ted / "days").glob("*.json")}
     day, today = FIRST_DAY, datetime.date.today()
+    counts, failed = Counter(), []
     while day <= today:
         out = CACHE / "nytbee" / f"{day.isoformat()}.json"
         if day.isoformat() not in have and not out.exists():
-            try:
-                answers = fetch_nytbee_day(day)
-            except OSError as error:
-                print(f"{day}: {error}; will retry next run")
-                answers = RETRY
-            if answers is not RETRY and (answers or today - day > RECENT_DAYS):
-                out.parent.mkdir(exist_ok=True)
-                out.write_text(json.dumps(answers))
+            status = fetch_and_cache_day(day, today, out)
+            counts[status] += 1
+            if status == "parse failures":
+                failed.append(day)
             time.sleep(0.4)
         day += datetime.timedelta(days=1)
+
+    print("nytbee: " + (", ".join(f"{n} {status}" for status, n in counts.items()) or "up to date"))
+    # A markup change would otherwise silently stop the list learning NYT's
+    # latest verdicts, so a recent parse failure stops the build.
+    recent = [d for d in failed if today - d <= FAILURE_WINDOW]
+    if recent:
+        raise SystemExit(
+            f"nytbee: couldn't parse {len(recent)} day(s) from the last "
+            f"{FAILURE_WINDOW.days} days (latest {max(recent)}); the page markup may "
+            "have changed, so update fetch_nytbee_day."
+        )
+
+
+def fetch_and_cache_day(day, today, out):
+    """Fetch one nytbee day, cache it if the result is final, and return its status."""
+    # A page from the last couple of days may be a placeholder or not posted
+    # yet, so its miss or empty list isn't final or alarming.
+    recent = today - day <= RECENT_DAYS
+    try:
+        answers = fetch_nytbee_day(day)
+    except ParseError as error:
+        if recent:
+            return "not posted yet"
+        print(f"{day}: {error}")
+        return "parse failures"
+    except OSError as error:
+        print(f"{day}: {error}; will retry next run")
+        return "errors"
+    if answers is None and recent:
+        return "not posted yet"
+    out.parent.mkdir(exist_ok=True)
+    out.write_text(json.dumps(answers))
+    return "fetched" if answers else "missing"
 
 
 def fetch_nytbee_day(day):
@@ -95,45 +133,62 @@ def fetch_nytbee_day(day):
         if error.code == 404:
             return None
         raise
-    # Pages before 2020 have no id; their official answers are the first list.
-    start = html.find('id="main-answer-list"')
-    if start < 0:
+    # Newer pages also have "common words" and "not in today's answers"
+    # lists, so if the id goes missing there, falling back to the first list
+    # could quietly cache the wrong words; it's only safe for old pages.
+    if day >= MAIN_LIST_ID_SINCE:
+        start = html.find('id="main-answer-list"')
+    else:
         start = html.find('class="answer-list"')
     if start < 0:
-        return None
+        raise ParseError("no answer list found")
     # Older pages list bare words and newer ones add a definition link, so
     # take the first word of each item's text rather than matching markup.
     end = html.find("</ul>", start)
     items = re.findall(r"<li>(.*?)</li>", html[start:end], re.S)
     words = [re.search(r"[a-z]+", re.sub(r"<[^>]+>", " ", item)) for item in items]
-    return [w.group() for w in words if w] or None
+    answers = [w.group() for w in words if w]
+    if not answers:
+        raise ParseError("answer list is empty")
+    # Real answers span exactly 7 letters (the pangram) and share the center;
+    # anything else means the wrong list was read.
+    letters = set().union(*answers)
+    if len(letters) != 7 or not set.intersection(*(set(w) for w in answers)):
+        raise ParseError(f"answers don't form a puzzle ({len(letters)} letters)")
+    return answers
 
 
 def load_puzzles():
-    puzzles = []
+    puzzles, skipped = [], []
     for path in (CACHE / "ted" / "days").glob("*.json"):
         data = json.loads(path.read_text())
         source = f"tedmiston {path.name}"
         check_words([data["centerLetter"], *data["validLetters"], *data["answers"]], source)
         puzzles.append(
-            (path.stem, data["centerLetter"], set(data["validLetters"]), set(data["answers"]))
+            (path.stem, {data["centerLetter"]}, set(data["validLetters"]), set(data["answers"]))
         )
     for path in (CACHE / "nytbee").glob("*.json"):
         answers = json.loads(path.read_text())
         if not answers:
             continue
         check_words(answers, f"nytbee {path.name}")
-        # The center letter is the only one in every answer; the pangram
-        # guarantees the union of answer letters is the full letter set.
-        common = set.intersection(*(set(w) for w in answers))
+        # The pangram makes the union of answer letters the full letter set.
+        # The center is in every answer, but so is another letter on ~2% of
+        # days; requiring all such letters only drops verdicts that depend on
+        # which one was the center, so those days still count.
+        required = set.intersection(*(set(w) for w in answers))
         letters = set().union(*answers)
-        if len(common) == 1 and len(letters) == 7:
-            puzzles.append((path.stem, common.pop(), letters, set(answers)))
+        if len(letters) == 7:
+            puzzles.append((path.stem, required, letters, set(answers)))
+        else:
+            skipped.append(path.stem)
+    if skipped:
+        print(f"skipped {len(skipped)} nytbee day(s) without 7 letters: {', '.join(sorted(skipped))}")
     return sorted(puzzles)
 
 
 def load_dictionary():
-    # NYT has used S in just 2 of ~2,900 puzzles, so untested S words would
+    # NYT has used S in just 3 of ~2,980 puzzles, so untested S words would
     # roughly double the list for little gain; accepted S words still get in.
     words = check_words((CACHE / "enable1.txt").read_text().split(), "ENABLE")
     return {w: frozenset(w) for w in words if len(w) >= 4 and len(set(w)) <= 7 and "s" not in w}
@@ -150,15 +205,15 @@ def classify(puzzles, dictionary):
         by_letters[letters].add(word)
 
     verdicts = {}
-    for date, center, letters, answers in puzzles:
+    for date, required, letters, answers in puzzles:
         for word in answers:
             by_letters[frozenset(word)].add(word)
-        # A word fits when its letter set is the center plus any subset of the
-        # other six, so 64 lookups replace scanning the whole dictionary.
-        others = sorted(letters - {center})
+        # A word fits when its letter set is the required letters plus any
+        # subset of the rest, so ≤64 lookups replace scanning the dictionary.
+        others = sorted(letters - required)
         for size in range(len(others) + 1):
             for combo in combinations(others, size):
-                for word in by_letters.get(frozenset(combo) | {center}, ()):
+                for word in by_letters.get(frozenset(combo) | required, ()):
                     verdicts[word] = (word in answers, date)
     return verdicts
 
@@ -177,8 +232,8 @@ def backtest(puzzles, dictionary):
     test = [p for p in puzzles if p[0] >= cutoff]
     words = build(train, dictionary)
     hits = extras = total = perfect = 0
-    for _, center, letters, answers in test:
-        found = {w for w in words if center in w and set(w) <= letters}
+    for _, required, letters, answers in test:
+        found = {w for w in words if required <= set(w) <= letters}
         hits += len(found & answers)
         extras += len(found - answers)
         total += len(answers)

@@ -11,7 +11,7 @@ Enter the puzzle's center letter and six outer letters to see:
 
 ## Word list
 
-Built from ~2,900 past NYT Spelling Bee puzzles: words NYT accepted the last
+Built from ~2,980 past NYT Spelling Bee puzzles: words NYT accepted the last
 time they fit a puzzle, plus untested words from the ENABLE word list. Refresh
 it with `python3 scripts/build_words.py`.
 

@@ -15,6 +15,21 @@ test("finds words, pangrams, and hints for a puzzle", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("types straight through from Center to Outer letters", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByLabel("Center letter").click();
+  await page.keyboard.type("pkncaedx");
+
+  await expect(page.getByLabel("Center letter")).toHaveValue("p");
+  await expect(page.getByLabel("Outer letters")).toHaveValue("kncaed");
+  await expect(page.locator(".word--pangram")).toContainText([
+    "kneecapped",
+    "pancaked",
+  ]);
+});
+
 for (const colorScheme of ["light", "dark"] as const) {
   test(`keeps pangrams highlighted in ${colorScheme} mode`, async ({
     page,

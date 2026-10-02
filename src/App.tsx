@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { LetterGridTable } from "./components/LetterGridTable";
 import { PrefixList } from "./components/PrefixList";
 import { WORDS } from "./data/words";
@@ -17,6 +17,7 @@ function App() {
   const [center, setCenter] = useState("");
   const [outer, setOuter] = useState("");
   const [hintsOnly, setHintsOnly] = useState(false);
+  const outerInput = useRef<HTMLInputElement>(null);
 
   const letters = center + outer;
   const words = useMemo(() => findWords(WORDS, center, outer), [center, outer]);
@@ -29,8 +30,13 @@ function App() {
     const letter = sanitizeLetters(value).slice(-1);
     setCenter(letter);
     setOuter((prev) => prev.replace(letter, ""));
+    // Move on once there's a letter, but not on Backspace, so the user can
+    // clear and retype the center without being pulled away.
+    if (letter) outerInput.current?.focus();
   };
 
+  // Capped in state, not with maxLength: maxLength counts characters, so a
+  // pasted "K, N, C, A, E, D" would be cut off before separators are stripped.
   const updateOuter = (value: string) => {
     setOuter(
       sanitizeLetters(value).replace(center, "").slice(0, OUTER_LETTER_COUNT),
@@ -66,6 +72,7 @@ function App() {
             Outer letters
           </label>
           <input
+            ref={outerInput}
             id="outer-letters"
             className="form__control letters__outer"
             value={outer}

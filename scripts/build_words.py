@@ -36,6 +36,9 @@ FIRST_DAY = datetime.date(2018, 7, 31)
 HOLDOUT_DAYS = 365
 RECENT_DAYS = datetime.timedelta(days=2)
 FAILURE_WINDOW = datetime.timedelta(days=30)
+# nytbee added id="main-answer-list" on this day. Older pages have no id, and
+# their official answers are the first "answer-list" block.
+MAIN_LIST_ID_SINCE = datetime.date(2019, 8, 17)
 WORD = re.compile(r"[a-z]+")
 
 
@@ -91,7 +94,7 @@ def fetch_sources():
     if recent:
         raise SystemExit(
             f"nytbee: couldn't parse {len(recent)} day(s) from the last "
-            f"{FAILURE_WINDOW.days} (latest {max(recent)}); the page markup may "
+            f"{FAILURE_WINDOW.days} days (latest {max(recent)}); the page markup may "
             "have changed, so update fetch_nytbee_day."
         )
 
@@ -130,9 +133,12 @@ def fetch_nytbee_day(day):
         if error.code == 404:
             return None
         raise
-    # Pages before 2020 have no id; their official answers are the first list.
-    start = html.find('id="main-answer-list"')
-    if start < 0:
+    # Newer pages also have "common words" and "not in today's answers"
+    # lists, so if the id goes missing there, falling back to the first list
+    # could quietly cache the wrong words; it's only safe for old pages.
+    if day >= MAIN_LIST_ID_SINCE:
+        start = html.find('id="main-answer-list"')
+    else:
         start = html.find('class="answer-list"')
     if start < 0:
         raise ParseError("no answer list found")
@@ -144,6 +150,11 @@ def fetch_nytbee_day(day):
     answers = [w.group() for w in words if w]
     if not answers:
         raise ParseError("answer list is empty")
+    # Real answers span exactly 7 letters (the pangram) and share the center;
+    # anything else means the wrong list was read.
+    letters = set().union(*answers)
+    if len(letters) != 7 or not set.intersection(*(set(w) for w in answers)):
+        raise ParseError(f"answers don't form a puzzle ({len(letters)} letters)")
     return answers
 
 

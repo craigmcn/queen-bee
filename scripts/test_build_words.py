@@ -85,18 +85,29 @@ class SourceValidationTest(CacheTestCase):
 
 
 
-CURRENT_PAGE = """<div id="main-answer-list" class="answer-list"><ul>
-<li><div class="flex-list-item">even
-<a onclick="show_definition('even')">&nbsp;&#8599;&nbsp;</a></div></li>
-<li><div class="flex-list-item">evening
-<a onclick="show_definition('evening')">&nbsp;&#8599;&nbsp;</a></div></li>
-</ul></div>"""
+def current_item(word):
+    return (
+        f'<li><div class="flex-list-item">{word}\n'
+        f"<a onclick=\"show_definition('{word}')\">&nbsp;&#8599;&nbsp;</a></div></li>"
+    )
+
+
+def answer_list(words, attrs='class="answer-list"', item=current_item):
+    return f"<div {attrs}><ul>{''.join(item(w) for w in words)}</ul></div>"
+
+
+# Today's layout: the official answers carry the id, and two more
+# "answer-list" blocks follow with words that aren't today's answers.
+CURRENT_PAGE = (
+    answer_list(["pancaked", "kappa", "deep"], 'id="main-answer-list" class="answer-list"')
+    + answer_list(["about", "every"])
+    + answer_list(["peaked", "panda"])
+)
 
 PRE_2020_PAGE = """<p>The official answers for today's puzzle are:</p>
 <div class="answer-list"><ul class="column-list">
 <li> bluff </li><li> <mark><strong>bullfrog</strong></mark> </li>
 </ul></div>"""
-
 
 def page(html):
     response = mock.MagicMock()
@@ -112,17 +123,18 @@ class HttpErrorMixin:
 
 
 class FetchNytbeeDayTest(HttpErrorMixin, unittest.TestCase):
-    day = datetime.date(2024, 1, 1)
+    current = datetime.date(2024, 1, 1)
+    pre_2020 = datetime.date(2019, 6, 1)
 
-    def fetch(self, result):
+    def fetch(self, result, day=current):
         with mock.patch.object(build_words.urllib.request, "urlopen") as urlopen:
             urlopen.side_effect = result if isinstance(result, Exception) else None
             urlopen.return_value = None if isinstance(result, Exception) else page(result)
-            return build_words.fetch_nytbee_day(self.day)
+            return build_words.fetch_nytbee_day(day)
 
     def test_reads_current_and_pre_2020_pages(self):
-        self.assertEqual(self.fetch(CURRENT_PAGE), ["even", "evening"])
-        self.assertEqual(self.fetch(PRE_2020_PAGE), ["bluff", "bullfrog"])
+        self.assertEqual(self.fetch(CURRENT_PAGE), ["pancaked", "kappa", "deep"])
+        self.assertEqual(self.fetch(PRE_2020_PAGE, self.pre_2020), ["bluff", "bullfrog"])
 
     def test_404_means_missing(self):
         self.assertIsNone(self.fetch(self.http_error(404)))
@@ -134,6 +146,19 @@ class FetchNytbeeDayTest(HttpErrorMixin, unittest.TestCase):
     def test_unreadable_page_is_a_parse_error_not_a_miss(self):
         for html in ["<p>redesigned page</p>", '<div id="main-answer-list"><ul></ul>']:
             with self.subTest(html=html), self.assertRaises(build_words.ParseError):
+                self.fetch(html)
+
+    def test_newer_page_without_the_id_doesnt_read_another_list(self):
+        # If nytbee dropped the id, the first remaining list holds valid-looking
+        # words that aren't the day's answers; that must fail, not get cached.
+        without_id = CURRENT_PAGE.replace('id="main-answer-list" ', "")
+        with self.assertRaisesRegex(build_words.ParseError, "no answer list"):
+            self.fetch(without_id)
+
+    def test_answers_that_dont_form_a_puzzle_are_a_parse_error(self):
+        for words in [["about", "every"], ["pack", "need"]]:
+            html = answer_list(words, 'id="main-answer-list" class="answer-list"')
+            with self.subTest(words=words), self.assertRaises(build_words.ParseError):
                 self.fetch(html)
 
 

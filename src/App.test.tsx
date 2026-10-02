@@ -47,6 +47,32 @@ describe("App", () => {
     expect(screen.queryByText(/\(pangram\)/)).not.toBeInTheDocument();
   });
 
+  it("moves focus to Outer letters once a center letter is typed", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.type(screen.getByLabelText("Center letter"), "p");
+    expect(screen.getByLabelText("Outer letters")).toHaveFocus();
+  });
+
+  it("keeps focus on Center letter when it's cleared", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    const center = screen.getByLabelText("Center letter");
+    await user.type(center, "p");
+    await user.type(center, "{backspace}");
+    expect(center).toHaveValue("");
+    expect(center).toHaveFocus();
+  });
+
+  it("caps pasted outer letters at six, ignoring separators and the center", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    // Typing the center moves focus to Outer letters, where the paste lands.
+    await user.type(screen.getByLabelText("Center letter"), "p");
+    await user.paste("P, K, N, C, A, E, D, X");
+    expect(screen.getByLabelText("Outer letters")).toHaveValue("kncaed");
+  });
+
   it("keeps the center letter out of the outer letters and caps them at six", async () => {
     await enterLetters("t", "tabcdefgh");
     expect(screen.getByLabelText("Outer letters")).toHaveValue("abcdef");

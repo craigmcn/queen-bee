@@ -55,7 +55,10 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   pangram bonus), `buildLetterGrid`, `buildPrefixCounts`.
 - **UI:** `src/App.tsx` owns the two letter inputs; entering a letter as the
   center removes it from the outer letters, and outer letters are de-duplicated
-  and capped at six. Results appear once a center letter is entered.
+  and capped at six in state. There's deliberately no `maxLength`, which counts
+  characters and would cut off a pasted "K, N, C, A, E, D". Typing a center
+  letter moves focus to Outer letters (not on Backspace), so a puzzle can be
+  typed straight through. Results appear once a center letter is entered.
   `LetterGridTable` shows "-" for zero cells like the NYT grid. A "Hints only"
   checkbox hides the word list (not the counts) for spoiler-free hunting.
 - **Styling:** albertcss v0.18.0 via CDN link in `index.html` (container,

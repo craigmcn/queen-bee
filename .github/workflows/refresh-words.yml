@@ -1,0 +1,80 @@
+name: refresh-words
+
+on:
+  schedule:
+    - cron: "23 9 * * 1" # Mondays, 09:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write # to dispatch test.yml on the refresh branch
+
+concurrency: refresh-words
+
+env:
+  BRANCH: chore/refresh-word-list
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # A cold cache backfills ~2,200 nytbee pages; later runs fetch a week.
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Restore word-list cache
+        uses: actions/cache/restore@v6
+        with:
+          path: scripts/.cache
+          key: word-cache-${{ github.run_id }}
+          restore-keys: word-cache-
+
+      - name: Rebuild word list
+        shell: bash
+        run: python3 scripts/build_words.py | tee build.log
+
+      # Saved even if the build fails, so a parse failure doesn't throw away
+      # the pages fetched before it (a cold backfill takes hours).
+      - name: Save word-list cache
+        if: always()
+        uses: actions/cache/save@v6
+        with:
+          path: scripts/.cache
+          key: word-cache-${{ github.run_id }}
+
+      - name: Open or update the refresh PR
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- src/data/words.ts; then
+            echo "Word list unchanged; nothing to do."
+            exit 0
+          fi
+
+          {
+            echo "Automated weekly refresh of \`src/data/words.ts\` from NYT Spelling Bee answer history (\`scripts/build_words.py\`)."
+            echo
+            echo '```'
+            cat build.log
+            echo '```'
+            echo
+            echo "Check the added and removed words look right, then merge."
+          } > pr-body.md
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add src/data/words.ts
+          git commit -q -m "chore: refresh word list" -m "$(grep '^words:' build.log)"
+          git push --force origin "$BRANCH"
+
+          if [ "$(gh pr view "$BRANCH" --json state --jq .state 2>/dev/null)" = "OPEN" ]; then
+            gh pr edit "$BRANCH" --body-file pr-body.md
+          else
+            gh pr create --base main --head "$BRANCH" \
+              --title "Refresh word list" --body-file pr-body.md
+          fi
+
+          gh workflow run test.yml --ref "$BRANCH"

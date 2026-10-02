@@ -307,5 +307,24 @@ class BuildTest(unittest.TestCase):
         )
 
 
+class DescribeChangesTest(CacheTestCase):
+    def test_reads_back_written_words(self):
+        self.assertEqual(build_words.read_words(), set())
+        build_words.write_words({"pace", "cape"})
+        self.assertEqual(build_words.read_words(), {"pace", "cape"})
+
+    def test_summarizes_added_and_removed_words(self):
+        summary = build_words.describe_changes({"pace", "abaft"}, {"pace", "pandan", "kneecap"})
+        self.assertEqual(
+            summary,
+            "words: +2 -1 (3 total)\nadded: kneecap, pandan\nremoved: abaft",
+        )
+
+    def test_truncates_long_lists(self):
+        new = {f"word{c}" for c in "abcdef"}
+        summary = build_words.describe_changes(set(), new, limit=2)
+        self.assertIn("added: worda, wordb, ... and 4 more", summary)
+        self.assertNotIn("removed", summary)
+
 if __name__ == "__main__":
     unittest.main()

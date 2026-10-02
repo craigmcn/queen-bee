@@ -49,7 +49,17 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   retried next run. The id-less pre-2019-08-17 layout fallback is date-gated,
   so newer pages can't fall through to their other word lists. An unreadable page from the last 30 days stops
   the build, since it usually means nytbee changed its markup: update
-  `fetch_nytbee_day`. Each run prints a fetch summary.
+  `fetch_nytbee_day`. Each run prints a fetch summary and the words
+  added/removed.
+- **Weekly refresh:** `.github/workflows/refresh-words.yml` runs the build
+  every Monday (or via "Run workflow"), keeping `scripts/.cache/` in the
+  Actions cache (saved even on failure; a cold cache takes hours). If
+  `words.ts` changed, it force-pushes `chore/refresh-word-list` and
+  opens/updates a PR with the build log. PRs opened with `GITHUB_TOKEN` don't
+  trigger `pull_request` workflows, so it dispatches `test.yml` on the branch
+  to produce the required `test` check. Needs the repo setting "Allow GitHub
+  Actions to create and approve pull requests". A parse failure fails the run
+  rather than opening a PR.
 - **Logic:** `src/lib/spellingBee.ts` — `findWords`, `isPangram` (needs all
   seven letters entered, so partial input shows no pangrams), `scoreWord` (NYT scoring: 4-letter = 1, else length, +7
   pangram bonus), `buildLetterGrid`, `buildPrefixCounts`.

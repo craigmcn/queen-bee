@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   pull_request:
+  # Lets refresh-words.yml run CI on its PR: PRs opened with GITHUB_TOKEN
+  # don't trigger pull_request workflows, but a dispatch does.
+  workflow_dispatch:
 
 jobs:
   test:

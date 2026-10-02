@@ -84,7 +84,6 @@ class SourceValidationTest(CacheTestCase):
         self.assertFalse(build_words.OUTPUT.exists())
 
 
-
 def current_item(word):
     return (
         f'<li><div class="flex-list-item">{word}\n'
@@ -109,6 +108,24 @@ PRE_2020_PAGE = """<p>The official answers for today's puzzle are:</p>
 <li> bluff </li><li> <mark><strong>bullfrog</strong></mark> </li>
 </ul></div>"""
 
+# 2019-08-17 into 2025: the id is there, but items are bare words.
+MIDDLE_PAGE = """<div id="main-answer-list" class="answer-list">
+<ul class="column-list">
+<li>
+    mono
+</li>
+<li>
+    <mark><strong>monotony</strong></mark>
+</li>
+<li>
+    month
+</li>
+<li>
+    moron
+</li>
+</ul></div>"""
+
+
 def page(html):
     response = mock.MagicMock()
     response.read.return_value = html.encode()
@@ -132,8 +149,9 @@ class FetchNytbeeDayTest(HttpErrorMixin, unittest.TestCase):
             urlopen.return_value = None if isinstance(result, Exception) else page(result)
             return build_words.fetch_nytbee_day(day)
 
-    def test_reads_current_and_pre_2020_pages(self):
+    def test_reads_each_page_layout(self):
         self.assertEqual(self.fetch(CURRENT_PAGE), ["pancaked", "kappa", "deep"])
+        self.assertEqual(self.fetch(MIDDLE_PAGE), ["mono", "monotony", "month", "moron"])
         self.assertEqual(self.fetch(PRE_2020_PAGE, self.pre_2020), ["bluff", "bullfrog"])
 
     def test_404_means_missing(self):
@@ -255,6 +273,38 @@ class ClassifyTest(unittest.TestCase):
         # Either letter could have been the center, so these get no verdict.
         self.assertNotIn("pace", verdicts)
         self.assertNotIn("cane", verdicts)
+
+
+    def test_latest_verdict_wins(self):
+        dictionary = {"pace": frozenset("pace")}
+
+        def puzzle(date, answers):
+            return (date, {"p"}, set("pancked"), answers)
+
+        accepted, rejected = {"pace"}, set()
+        history = [
+            puzzle("2019-01-01", accepted),
+            puzzle("2021-01-01", rejected),
+            puzzle("2023-01-01", accepted),
+        ]
+        self.assertEqual(build_words.classify(history, dictionary)["pace"], (True, "2023-01-01"))
+        self.assertEqual(build_words.classify(history[:2], dictionary)["pace"], (False, "2021-01-01"))
+
+    def test_words_that_never_fit_get_no_verdict(self):
+        dictionary = {"zest": frozenset("zest")}
+        puzzle = ("2024-01-01", {"p"}, set("pancked"), {"pancaked"})
+        self.assertNotIn("zest", build_words.classify([puzzle], dictionary))
+
+
+class BuildTest(unittest.TestCase):
+    def test_combines_accepted_and_untested_words_minus_rejected(self):
+        dictionary = {w: frozenset(w) for w in ["pace", "cane", "zoom"]}
+        # "pancaked" isn't in the dictionary; "cane" fits but was left out.
+        puzzle = ("2024-01-01", {"a"}, set("pancked"), {"pancaked", "pace"})
+        self.assertEqual(
+            build_words.build([puzzle], dictionary),
+            {"pancaked", "pace", "zoom"},
+        )
 
 
 if __name__ == "__main__":

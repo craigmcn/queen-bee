@@ -5,11 +5,6 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   base: "./",
   plugins: [react()],
-  build: {
-    // The bundled ~37k-word list alone is ~300 kB (~180 kB gzipped); it's
-    // needed on first render, so splitting it out wouldn't help.
-    chunkSizeWarningLimit: 600,
-  },
   server: {
     port: 3180,
   },

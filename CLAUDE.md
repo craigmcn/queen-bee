@@ -59,6 +59,13 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   characters and would cut off a pasted "K, N, C, A, E, D". Typing a center
   letter moves focus to Outer letters (not on Backspace), so a puzzle can be
   typed straight through. Results appear once a center letter is entered.
+  The word list is lazy-loaded (`src/data/useWordList.ts`, dynamic `import()`
+  on mount) as its own chunk, so the form renders without waiting for it
+  (entry chunk ~71 kB gzipped vs ~112 kB for the words). Until it arrives,
+  results show "Loading words…", and a failed load shows a reload message.
+  Tests that need results must wait for them (`findBy…`);
+  `src/App.loading.test.tsx` mocks the import per test with `vi.doMock`,
+  since a hoisted `vi.mock` stays cached across `vi.resetModules()`.
   `LetterGridTable` shows "-" for zero cells like the NYT grid. A "Hints only"
   checkbox hides the word list (not the counts) for spoiler-free hunting.
 - **Styling:** albertcss v0.18.0 via CDN link in `index.html` (container,

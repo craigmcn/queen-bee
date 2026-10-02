@@ -326,5 +326,6 @@ class DescribeChangesTest(CacheTestCase):
         self.assertIn("added: worda, wordb, ... and 4 more", summary)
         self.assertNotIn("removed", summary)
 
+
 if __name__ == "__main__":
     unittest.main()

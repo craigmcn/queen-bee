@@ -51,15 +51,17 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   the build, since it usually means nytbee changed its markup: update
   `fetch_nytbee_day`. Each run prints a fetch summary and the words
   added/removed.
-- **Weekly refresh:** `.github/workflows/refresh-words.yml` runs the build
-  every Monday (or via "Run workflow"), keeping `scripts/.cache/` in the
-  Actions cache (saved even on failure; a cold cache takes hours). If
-  `words.ts` changed, it force-pushes `chore/refresh-word-list` and
-  opens/updates a PR with the build log. PRs opened with `GITHUB_TOKEN` don't
-  trigger `pull_request` workflows, so it dispatches `test.yml` on the branch
-  to produce the required `test` check. Needs the repo setting "Allow GitHub
-  Actions to create and approve pull requests". A parse failure fails the run
-  rather than opening a PR.
+- **Scheduled refresh:** `.github/workflows/refresh-words.yml` runs the build
+  Mondays and Thursdays (or via "Run workflow"), keeping `scripts/.cache/` in
+  the Actions cache. The cache is saved even on failure, since a cold cache
+  takes hours. It runs twice weekly because Actions evicts caches unused for
+  7 days. If `words.ts` changed, it rebuilds `chore/refresh-word-list` from
+  `main`, force-pushes it (so manual commits on an open refresh PR get
+  overwritten), and opens or updates a PR with the build log. PRs opened with
+  `GITHUB_TOKEN` don't trigger `pull_request` workflows, so it dispatches
+  `test.yml` on the branch to produce the required `test` check. Needs the repo
+  setting "Allow GitHub Actions to create and approve pull requests". A parse
+  failure fails the run rather than opening a PR.
 - **Logic:** `src/lib/spellingBee.ts` — `findWords`, `isPangram` (needs all
   seven letters entered, so partial input shows no pangrams), `scoreWord` (NYT scoring: 4-letter = 1, else length, +7
   pangram bonus), `buildLetterGrid`, `buildPrefixCounts`.

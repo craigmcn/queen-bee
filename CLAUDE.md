@@ -39,7 +39,7 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   (e.g. "pandan").
 - **Refreshing the list:** `python3 scripts/build_words.py` fetches new days
   into `scripts/.cache/` (gitignored; first run backfills ~2,200 nytbee pages,
-  about 45 min), prints the backtest, and rewrites `words.ts`. `--backtest`
+  ~26 min in CI), prints the backtest, and rewrites `words.ts`. `--backtest`
   evaluates without writing; `--no-fetch` uses the cache only.
   Every source and the output are checked against `^[a-z]+$`; the build stops
   on anything else, since words land in a JS template literal. Only final
@@ -55,15 +55,20 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   added/removed.
 - **Scheduled refresh:** `.github/workflows/refresh-words.yml` runs the build
   Mondays and Thursdays (or via "Run workflow"), keeping `scripts/.cache/` in
-  the Actions cache. The cache is saved even on failure, since a cold cache
-  takes hours. It runs twice weekly because Actions evicts caches unused for
-  7 days. If `words.ts` changed, it rebuilds `chore/refresh-word-list` from
+  the Actions cache. The cache is saved even on failure, so a parse failure
+  keeps the pages fetched before it. It runs twice weekly because Actions
+  evicts caches unused for 7 days (a cold rebuild is ~26 min; the job times
+  out at 90). A failed pull of the dormant tedmiston repo only warns and uses
+  the cached clone. If `words.ts` changed, it rebuilds `chore/refresh-word-list` from
   `main`, force-pushes it (so manual commits on an open refresh PR get
   overwritten), and opens or updates a PR with the build log. PRs opened with
   `GITHUB_TOKEN` don't trigger `pull_request` workflows, so it dispatches
   `test.yml` on the branch to produce the required `test` check. Needs the repo
   setting "Allow GitHub Actions to create and approve pull requests". A parse
-  failure fails the run rather than opening a PR.
+  failure fails the run rather than opening a PR. `src/data/words.test.ts` is a
+  deliberate tripwire: it checks real NYT verdicts for one puzzle, so a red
+  refresh PR there means NYT changed a guarded word. Confirm the change and
+  update the test in that PR (the PR description says so too).
 - **Logic:** `src/lib/spellingBee.ts` — `findWords`, `isPangram` (needs all
   seven letters entered, so partial input shows no pangrams), `scoreWord` (NYT scoring: 4-letter = 1, else length, +7
   pangram bonus), `buildLetterGrid`, `buildPrefixCounts`.

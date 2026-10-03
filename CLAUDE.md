@@ -43,9 +43,11 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   evaluates without writing; `--no-fetch` uses the cache only.
   Every source and the output are checked against `^[a-z]+$`; the build stops
   on anything else, since words land in a JS template literal. Only final
-  nytbee results are cached (answers, or `null` for a 404); network errors,
+  nytbee results are cached (answers, or `null` for a 404); network errors
+  (including truncated responses),
   pages from the last 2 days, and pages that load without a readable answer
-  list (or whose answers don't span exactly 7 letters with a shared one) are
+  list (or whose answers don't span exactly 7 letters with a shared one, or
+  whose list contains invalid UTF-8, which could split a word) are
   retried next run. The id-less pre-2019-08-17 layout fallback is date-gated,
   so newer pages can't fall through to their other word lists. An unreadable page from the last 30 days stops
   the build, since it usually means nytbee changed its markup: update

@@ -43,6 +43,11 @@
   color: var(--grey700);
 }
 
+/* Kept in the DOM as a live region, so collapse it rather than hide it. */
+.results-status:empty {
+  margin: 0;
+}
+
 .stats {
   color: var(--grey700);
   margin-top: 0;

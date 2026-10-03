@@ -27,16 +27,21 @@ describe("App word-list loading", () => {
   it("shows a loading state, then results once the list arrives", async () => {
     let resolve!: (module: WordsModule) => void;
     await renderApp(() => new Promise((r) => (resolve = r)));
-    await enterLetters();
+    // The live region must exist, empty, before its text appears, or screen
+    // readers may not announce it.
+    const status = screen.getByRole("status");
+    expect(status).toBeEmptyDOMElement();
 
-    expect(screen.getByRole("status")).toHaveTextContent("Loading words");
+    await enterLetters();
+    expect(status).toHaveTextContent("Loading words");
     expect(screen.queryByText(/0 words/)).not.toBeInTheDocument();
 
     resolve({ WORDS: ["pace", "cape", "peek"] });
     expect(
       await screen.findByRole("heading", { name: "2 words" }),
     ).toBeInTheDocument();
-    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    expect(screen.getByRole("status")).toBe(status);
+    expect(status).toBeEmptyDOMElement();
   });
 
   it("explains when the list fails to load", async () => {
@@ -50,6 +55,6 @@ describe("App word-list loading", () => {
 
   it("shows nothing until a center letter is entered", async () => {
     await renderApp(() => new Promise(() => {}));
-    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    expect(screen.getByRole("status")).toBeEmptyDOMElement();
   });
 });

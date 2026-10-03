@@ -74,7 +74,9 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   The word list is lazy-loaded (`src/data/useWordList.ts`, dynamic `import()`
   on mount) as its own chunk, so the form renders without waiting for it
   (entry chunk ~71 kB gzipped vs ~112 kB for the words). Until it arrives,
-  results show "Loading words…", and a failed load shows a reload message.
+  results show "Loading words…" in a `role="status"` paragraph that is always
+  rendered (empty otherwise), because screen readers often skip a live region
+  inserted with its text. A failed load shows a reload message (`role="alert"`).
   Tests that need results must wait for them (`findBy…`);
   `src/App.loading.test.tsx` mocks the import per test with `vi.doMock`,
   since a hoisted `vi.mock` stays cached across `vi.resetModules()`.

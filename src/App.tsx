@@ -101,11 +101,11 @@ function App() {
         </button>
       </form>
 
-      {center && wordList.status === "loading" && (
-        <p className="results-status" role="status">
-          Loading words&hellip;
-        </p>
-      )}
+      {/* Always rendered, starting empty: screen readers often skip a live
+          region that's inserted with its text already in it. */}
+      <p className="results-status" role="status">
+        {center && wordList.status === "loading" ? "Loading words…" : ""}
+      </p>
 
       {center && wordList.status === "error" && (
         <p className="results-status" role="alert">

@@ -13,6 +13,7 @@ the held-out year's answers.
 
 import argparse
 import datetime
+import http.client
 import json
 import re
 import subprocess
@@ -111,8 +112,10 @@ def fetch_and_cache_day(day, today, out):
             return "not posted yet"
         print(f"{day}: {error}")
         return "parse failures"
-    except OSError as error:
-        print(f"{day}: {error}; will retry next run")
+    # IncompleteRead (a truncated response) is an HTTPException, not an
+    # OSError; neither should end the run, so both are retried next time.
+    except (OSError, http.client.HTTPException) as error:
+        print(f"{day}: {error!r}; will retry next run")
         return "errors"
     if answers is None and recent:
         return "not posted yet"
@@ -128,7 +131,9 @@ def fetch_nytbee_day(day):
     # Only a 404 means the page doesn't exist; other errors (429, 503,
     # network) propagate so the caller retries instead of caching a miss.
     try:
-        html = urllib.request.urlopen(req, timeout=30).read().decode()
+        # A stray bad byte elsewhere on the page shouldn't matter; one inside
+        # the answer list is caught below.
+        html = urllib.request.urlopen(req, timeout=30).read().decode(errors="replace")
     except urllib.error.HTTPError as error:
         if error.code == 404:
             return None
@@ -145,7 +150,12 @@ def fetch_nytbee_day(day):
     # Older pages list bare words and newer ones add a definition link, so
     # take the first word of each item's text rather than matching markup.
     end = html.find("</ul>", start)
-    items = re.findall(r"<li>(.*?)</li>", html[start:end], re.S)
+    answer_list = html[start:end]
+    # A replaced byte would split a word ("pan\ufffdcaked" reads as "pan"),
+    # caching a fake answer and a false rejection, so treat it as unreadable.
+    if "\ufffd" in answer_list:
+        raise ParseError("answer list isn't valid UTF-8")
+    items = re.findall(r"<li>(.*?)</li>", answer_list, re.S)
     words = [re.search(r"[a-z]+", re.sub(r"<[^>]+>", " ", item)) for item in items]
     answers = [w.group() for w in words if w]
     if not answers:

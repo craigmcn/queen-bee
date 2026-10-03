@@ -5,6 +5,7 @@
 
 import contextlib
 import datetime
+import http.client
 import io
 import json
 import tempfile
@@ -128,7 +129,7 @@ MIDDLE_PAGE = """<div id="main-answer-list" class="answer-list">
 
 def page(html):
     response = mock.MagicMock()
-    response.read.return_value = html.encode()
+    response.read.return_value = html if isinstance(html, bytes) else html.encode()
     return response
 
 
@@ -172,6 +173,16 @@ class FetchNytbeeDayTest(HttpErrorMixin, unittest.TestCase):
         without_id = CURRENT_PAGE.replace('id="main-answer-list" ', "")
         with self.assertRaisesRegex(build_words.ParseError, "no answer list"):
             self.fetch(without_id)
+
+    def test_invalid_utf8_outside_the_answer_list_is_ignored(self):
+        html = b"<p>caf\xff</p>" + CURRENT_PAGE.encode()
+        self.assertEqual(self.fetch(html), ["pancaked", "kappa", "deep"])
+
+    def test_invalid_utf8_inside_the_answer_list_is_a_parse_error(self):
+        # Decoded leniently, "pan\xffcaked" would read as the answer "pan".
+        html = CURRENT_PAGE.encode().replace(b"pancaked", b"pan\xffcaked", 1)
+        with self.assertRaisesRegex(build_words.ParseError, "valid UTF-8"):
+            self.fetch(html)
 
     def test_answers_that_dont_form_a_puzzle_are_a_parse_error(self):
         for words in [["about", "every"], ["pack", "need"]]:
@@ -230,6 +241,13 @@ class FetchSourcesTest(HttpErrorMixin, CacheTestCase):
             self.assertEqual(self.cached(age), "not cached")
         self.assertIn("1 errors", output)
         self.assertIn("2 not posted yet", output)
+
+    def test_truncated_response_is_retried_not_fatal(self):
+        output = self.run_fetch(5, {5: http.client.IncompleteRead(b"partial")})
+        self.assertEqual(self.cached(5), "not cached")
+        self.assertEqual(self.cached(4), ["apace"])
+        self.assertIn("1 errors", output)
+        self.assertIn("IncompleteRead", output)
 
     def test_recent_parse_failure_stops_the_build_uncached(self):
         with self.assertRaisesRegex(SystemExit, "markup may have changed"):

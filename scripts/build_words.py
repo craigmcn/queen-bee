@@ -66,9 +66,15 @@ def fetch_sources():
     if not enable.exists():
         urllib.request.urlretrieve(ENABLE_URL, enable)
 
+    # tedmiston's archive stopped updating in 2025-03, so a failed pull (repo
+    # gone, renamed or rewritten) mustn't stop the build when the cached
+    # clone already holds everything; only a missing clone is fatal.
     ted = CACHE / "ted"
     if ted.exists():
-        subprocess.run(["git", "-C", ted, "pull", "-q"], check=True)
+        try:
+            subprocess.run(["git", "-C", ted, "pull", "-q"], check=True)
+        except (subprocess.CalledProcessError, OSError) as error:
+            print(f"tedmiston: pull failed ({error}); using the cached clone")
     else:
         subprocess.run(["git", "clone", "-q", "--depth", "1", TED_REPO, ted], check=True)
 

@@ -242,6 +242,23 @@ class FetchSourcesTest(HttpErrorMixin, CacheTestCase):
         self.assertIn("1 errors", output)
         self.assertIn("2 not posted yet", output)
 
+    def test_failed_tedmiston_pull_uses_the_cached_clone(self):
+        build_words.subprocess.run.side_effect = build_words.subprocess.CalledProcessError(
+            1, ["git", "pull"]
+        )
+        output = self.run_fetch(0, {})
+        self.assertIn("tedmiston: pull failed", output)
+        self.assertEqual(self.cached(0), ["apace"])
+
+    def test_missing_tedmiston_clone_that_cant_be_cloned_is_fatal(self):
+        (self.cache / "ted" / "days").rmdir()
+        (self.cache / "ted").rmdir()
+        build_words.subprocess.run.side_effect = build_words.subprocess.CalledProcessError(
+            128, ["git", "clone"]
+        )
+        with self.assertRaises(build_words.subprocess.CalledProcessError):
+            self.run_fetch(0, {})
+
     def test_truncated_response_is_retried_not_fatal(self):
         output = self.run_fetch(5, {5: http.client.IncompleteRead(b"partial")})
         self.assertEqual(self.cached(5), "not cached")

@@ -3,7 +3,7 @@ name: refresh-words
 on:
   schedule:
     # Twice weekly, not weekly: Actions evicts caches unused for 7 days, and
-    # losing scripts/.cache means hours of re-fetching on the next run.
+    # losing scripts/.cache means re-fetching ~2,200 pages on the next run.
     - cron: "23 9 * * 1,4" # Mondays and Thursdays, 09:23 UTC
   workflow_dispatch:
 
@@ -20,8 +20,10 @@ env:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    # A cold cache backfills ~2,200 nytbee pages; later runs fetch a week.
-    timeout-minutes: 300
+    # A cold cache backfills ~2,200 nytbee pages in ~26 min (first run,
+    # 2026-10-02); later runs fetch the few days since the last one. The
+    # margin allows for a slow nytbee without letting a hang run for hours.
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v7
 
@@ -37,7 +39,7 @@ jobs:
         run: python3 scripts/build_words.py | tee build.log
 
       # Saved even if the build fails, so a parse failure doesn't throw away
-      # the pages fetched before it (a cold backfill takes hours).
+      # the pages fetched before it.
       - name: Save word-list cache
         if: always()
         uses: actions/cache/save@v6
@@ -63,6 +65,8 @@ jobs:
             echo '```'
             echo
             echo "Check the added and removed words look right, then merge."
+            echo
+            echo "If \`src/data/words.test.ts\` fails, NYT changed a verdict on one of the words it deliberately guards: confirm the change, then update the test in this PR."
           } > pr-body.md
 
           git config user.name "github-actions[bot]"

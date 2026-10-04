@@ -32,6 +32,11 @@ jobs:
 
       - run: yarn build
 
+      # The CSP allows index.html's inline script by hash; check the built
+      # page too, in case the build ever changes the script's bytes.
+      - name: Check CSP hash against the built page
+        run: python3 scripts/check_csp_hash.py dist/index.html
+
       - run: yarn test:coverage
 
       - name: Test word-list build script

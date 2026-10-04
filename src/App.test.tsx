@@ -14,6 +14,11 @@ async function enterLetters(center: string, outer: string) {
   return user;
 }
 
+// The word list starts hidden (hints only), so tests of the list reveal it.
+async function showWordList(user: ReturnType<typeof userEvent.setup>) {
+  await user.click(screen.getByLabelText(/hints only/i));
+}
+
 describe("App", () => {
   it("has no detectable accessibility violations", async () => {
     const { container } = render(<App />);
@@ -21,7 +26,7 @@ describe("App", () => {
   });
 
   it("has no accessibility violations with results shown", async () => {
-    await enterLetters("t", "acreln");
+    await showWordList(await enterLetters("t", "acreln"));
     expect(await axe(document.body)).toHaveNoViolations();
   });
 
@@ -31,7 +36,7 @@ describe("App", () => {
   });
 
   it("lists valid words and highlights pangrams", async () => {
-    await enterLetters("t", "acreln");
+    await showWordList(await enterLetters("t", "acreln"));
 
     const words = within(
       screen.getByRole("region", { name: /words?$/ }),
@@ -43,7 +48,8 @@ describe("App", () => {
   });
 
   it("doesn't highlight pangrams until all seven letters are entered", async () => {
-    await enterLetters("t", "acre");
+    await showWordList(await enterLetters("t", "acre"));
+    expect(screen.getByText("crate")).toBeInTheDocument();
 
     expect(screen.getByText(/0 pangrams/)).toBeInTheDocument();
     expect(screen.queryByText(/\(pangram\)/)).not.toBeInTheDocument();
@@ -94,15 +100,23 @@ describe("App", () => {
     ).toBeInTheDocument();
   });
 
-  it("hides the word list but keeps the hints in hints-only mode", async () => {
+  it("hides the word list by default but keeps the counts and hints", async () => {
     const user = await enterLetters("t", "acreln");
-    await user.click(screen.getByLabelText(/hints only/i));
 
+    expect(screen.getByLabelText(/hints only/i)).toBeChecked();
     expect(screen.queryByText("tract")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /\d+ words/ }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("table")).toBeInTheDocument();
     expect(
       screen.getByRole("region", { name: "Two-letter list" }),
     ).toBeInTheDocument();
+
+    await showWordList(user);
+    expect(screen.getByText("tract")).toBeInTheDocument();
+    await user.click(screen.getByLabelText(/hints only/i));
+    expect(screen.queryByText("tract")).not.toBeInTheDocument();
   });
 
   it("clears the letters", async () => {

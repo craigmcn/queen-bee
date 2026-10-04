@@ -88,7 +88,9 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   `src/App.loading.test.tsx` mocks the import per test with `vi.doMock`,
   since a hoisted `vi.mock` stays cached across `vi.resetModules()`.
   `LetterGridTable` shows "-" for zero cells like the NYT grid. A "Hints only"
-  checkbox hides the word list (not the counts) for spoiler-free hunting.
+  checkbox, **checked by default**, hides the word list (not the counts) for
+  spoiler-free hunting. Tests of the list uncheck it first (`showWordList` in
+  `App.test.tsx` and `e2e/queen-bee.spec.ts`).
 - **Styling:** albertcss v0.18.0 via CDN link in `index.html` (container,
   `form__*`, `button`, `table--sm table--bordered`, `visually-hidden`), which
   also provides light/dark theming through `light-dark()` tokens. App CSS only

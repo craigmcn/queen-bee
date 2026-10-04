@@ -1,9 +1,15 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
+
+// The word list starts hidden (hints only), so tests of the list reveal it.
+async function showWordList(page: Page) {
+  await page.getByLabel(/hints only/i).uncheck();
+}
 
 test("finds words, pangrams, and hints for a puzzle", async ({ page }) => {
   await page.goto("/");
   await page.getByLabel("Center letter").fill("t");
   await page.getByLabel("Outer letters").fill("acreln");
+  await showWordList(page);
 
   const results = page.getByRole("region", { name: /words?$/ });
   await expect(results.getByText("tract", { exact: true })).toBeVisible();
@@ -24,6 +30,7 @@ test("types straight through from Center to Outer letters", async ({
 
   await expect(page.getByLabel("Center letter")).toHaveValue("p");
   await expect(page.getByLabel("Outer letters")).toHaveValue("kncaed");
+  await showWordList(page);
   await expect(page.locator(".word--pangram")).toContainText([
     "kneecapped",
     "pancaked",
@@ -38,6 +45,7 @@ for (const colorScheme of ["light", "dark"] as const) {
     await page.goto("/");
     await page.getByLabel("Center letter").fill("t");
     await page.getByLabel("Outer letters").fill("acreln");
+    await showWordList(page);
 
     await expect(page.locator(".word--pangram").first()).toHaveCSS(
       "background-color",
@@ -45,3 +53,14 @@ for (const colorScheme of ["light", "dark"] as const) {
     );
   });
 }
+
+test("hides the word list until Hints only is unchecked", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Center letter").fill("t");
+  await page.getByLabel("Outer letters").fill("acreln");
+
+  await expect(page.getByRole("table")).toBeVisible();
+  await expect(page.getByText("tract", { exact: true })).toHaveCount(0);
+  await showWordList(page);
+  await expect(page.getByText("tract", { exact: true })).toBeVisible();
+});

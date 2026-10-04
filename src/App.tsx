@@ -16,7 +16,9 @@ import "./App.css";
 function App() {
   const [center, setCenter] = useState("");
   const [outer, setOuter] = useState("");
-  const [hintsOnly, setHintsOnly] = useState(false);
+  // Spoiler-free by default: the hints are enough to hunt with, and the
+  // full list is one click away.
+  const [hintsOnly, setHintsOnly] = useState(true);
   const outerInput = useRef<HTMLInputElement>(null);
 
   const letters = center + outer;

@@ -1227,25 +1227,25 @@ eccentric eccentricity eccrine echard echelon echeloned echeveria echidna
 echinacea echinoid echo echoed echoer echoey echoic echoing echolalia
 echolalic echolocate eclair eclat eclectic eclectically ecliptic eclogite
 eclogue ecocidal ecocide ecofreak ecologic ecological ecology econobox
-economic economize economy ecotage ecotonal ecotone ecotypic ecru ecthyma
-ecthymata ectoderm ectomere ectopia ectopic ectotherm ectozoa ectozoan
-ectozoon ectypal ecumenic eczema edacity edamame eddied eddy eddying edema
-edge edged edger edgier edging edgy edibility edible edict edictal edifice
-edified edifier edify edifying edit editable edited editing edition editor
-educable educate educated educe educed educible educing eductor eelier eelworm
-eely eerie eerier eerily eery efface effaceable effaced effacement effacer
-effacing effect effected effecter effecting effective effectivity effector
-effectual effectuate effectuated effeminate efferent efferently effete
-effetely efficacity efficacy efficiency efficient effigy effluence effluent
-effluvia effluvium efflux effort effortful effrontery effulgence effulgent
-egad eger eggar eggbeater eggcup egged egger egghead eggheaded egging eggnog
-eggplant eggy eglantine eglatere egomania egret eider eiderdown eidetic eidola
-eidolon eigenmode eight eighteen eighteenth eighth eighthly eightieth eightvo
-eighty einkorn eirenic either ejaculate eject ejecta ejectable ejected
-ejecting ejection ejective ejectment ejector eked eking ekpwele ektexine
-elaborate elan eland elaphine elate elated elatedly elater elaterid elaterin
-elaterite elating elation elbow elbowed elbowroom elder elderberry elderly
-eldrich elecampane elect electable elected electee electing election elective
+economic economize economy ecotage ecotonal ecotypic ecru ecthyma ecthymata
+ectoderm ectomere ectopia ectopic ectotherm ectozoa ectozoan ectozoon ectypal
+ecumenic eczema edacity edamame eddied eddy eddying edema edge edged edger
+edgier edging edgy edibility edible edict edictal edifice edified edifier
+edify edifying edit editable edited editing edition editor educable educate
+educated educe educed educible educing eductor eelier eelworm eely eerie
+eerier eerily eery efface effaceable effaced effacement effacer effacing
+effect effected effecter effecting effective effectivity effector effectual
+effectuate effectuated effeminate efferent efferently effete effetely
+efficacity efficacy efficiency efficient effigy effluence effluent effluvia
+effluvium efflux effort effortful effrontery effulgence effulgent egad eger
+eggar eggbeater eggcup egged egger egghead eggheaded egging eggnog eggplant
+eggy eglantine eglatere egomania egret eider eiderdown eidetic eidola eidolon
+eigenmode eight eighteen eighteenth eighth eighthly eightieth eightvo eighty
+einkorn eirenic either ejaculate eject ejecta ejectable ejected ejecting
+ejection ejective ejectment ejector eked eking ekpwele ektexine elaborate elan
+eland elaphine elate elated elatedly elater elaterid elaterin elaterite
+elating elation elbow elbowed elbowroom elder elderberry elderly eldrich
+elecampane elect electable elected electee electing election elective
 electively elector electoral electorate electret electric electrical
 electricity electro electrocute electrode electroed electrojet electrolyte
 electrometer electron electrum elegance elegancy elegant elegantly elegiac

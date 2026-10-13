@@ -139,6 +139,7 @@ function App() {
                 title="Pangrams"
                 words={pangrams}
                 pangrams={pangramSet}
+                labelPangrams={false}
                 emptyMessage={
                   complete
                     ? "No pangrams."

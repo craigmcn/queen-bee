@@ -21,13 +21,26 @@ describe("WordList", () => {
     ]);
   });
 
-  it("doesn't repeat the label in a list of only pangrams", () => {
+  it("labels pangrams even when every word is one", () => {
+    render(
+      <WordList
+        title="All words"
+        words={["central"]}
+        pangrams={new Set(["central"])}
+        emptyMessage="No words."
+      />,
+    );
+    expect(screen.getByRole("listitem")).toHaveTextContent("central (pangram)");
+  });
+
+  it("can leave the label out where the heading says it", () => {
     render(
       <WordList
         title="Pangrams"
         words={["central"]}
         pangrams={new Set(["central"])}
         emptyMessage="No pangrams."
+        labelPangrams={false}
       />,
     );
     expect(screen.getByRole("listitem")).toHaveTextContent(/^central$/);

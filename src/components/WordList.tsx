@@ -5,16 +5,15 @@ export function WordList({
   words,
   pangrams,
   emptyMessage,
+  labelPangrams = true,
 }: {
   title: string;
   words: readonly string[];
   pangrams: ReadonlySet<string>;
   emptyMessage: string;
+  labelPangrams?: boolean;
 }) {
   const headingId = useId();
-  // Among other words, the highlight needs a text equivalent; in a list of
-  // only pangrams, the heading already says it.
-  const labelPangrams = words.some((word) => !pangrams.has(word));
 
   return (
     <>
@@ -29,6 +28,8 @@ export function WordList({
             pangrams.has(word) ? (
               <li key={word} className="word word--pangram">
                 <strong>{word}</strong>
+                {/* The highlight needs a text equivalent, except in the
+                    Pangrams list, whose heading already says it. */}
                 {labelPangrams && (
                   <span className="visually-hidden"> (pangram)</span>
                 )}

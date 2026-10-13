@@ -14,9 +14,9 @@ async function enterLetters(center: string, outer: string) {
   return user;
 }
 
-// The word list starts hidden (hints only), so tests of the list reveal it.
+// The word lists start hidden, so tests of them reveal them.
 async function showWordList(user: ReturnType<typeof userEvent.setup>) {
-  await user.click(screen.getByLabelText(/hints only/i));
+  await user.click(screen.getByLabelText("Show all words"));
 }
 
 describe("App", () => {
@@ -39,7 +39,7 @@ describe("App", () => {
     await showWordList(await enterLetters("t", "acreln"));
 
     const words = within(
-      screen.getByRole("region", { name: /words?$/ }),
+      screen.getByRole("list", { name: "All words" }),
     ).getAllByRole("listitem");
     const text = words.map((li) => li.textContent);
     expect(text).toContain("tract");
@@ -100,11 +100,13 @@ describe("App", () => {
     ).toBeInTheDocument();
   });
 
-  it("hides the word list by default but keeps the counts and hints", async () => {
+  it("hides the word lists by default but keeps the counts and hints", async () => {
     const user = await enterLetters("t", "acreln");
 
-    expect(screen.getByLabelText(/hints only/i)).toBeChecked();
+    expect(screen.getByLabelText("Show pangrams")).not.toBeChecked();
+    expect(screen.getByLabelText("Show all words")).not.toBeChecked();
     expect(screen.queryByText("tract")).not.toBeInTheDocument();
+    expect(screen.queryByText("central")).not.toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: /\d+ words/ }),
     ).toBeInTheDocument();
@@ -115,8 +117,25 @@ describe("App", () => {
 
     await showWordList(user);
     expect(screen.getByText("tract")).toBeInTheDocument();
-    await user.click(screen.getByLabelText(/hints only/i));
+    await user.click(screen.getByLabelText("Show all words"));
     expect(screen.queryByText("tract")).not.toBeInTheDocument();
+  });
+
+  it("shows the pangrams on their own", async () => {
+    const user = await enterLetters("t", "acreln");
+    await user.click(screen.getByLabelText("Show pangrams"));
+
+    const pangrams = within(
+      screen.getByRole("list", { name: "Pangrams" }),
+    ).getAllByRole("listitem");
+    expect(pangrams.map((li) => li.textContent)).toContain("central");
+    expect(screen.queryByText("tract")).not.toBeInTheDocument();
+  });
+
+  it("says so when there are no pangrams to show", async () => {
+    const user = await enterLetters("t", "acre");
+    await user.click(screen.getByLabelText("Show pangrams"));
+    expect(screen.getByText("No pangrams.")).toBeInTheDocument();
   });
 
   it("clears the letters", async () => {

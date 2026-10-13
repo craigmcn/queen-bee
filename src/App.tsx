@@ -16,9 +16,10 @@ import "./App.css";
 function App() {
   const [center, setCenter] = useState("");
   const [outer, setOuter] = useState("");
-  // Spoiler-free by default: the hints are enough to hunt with, and the
-  // full list is one click away.
-  const [hintsOnly, setHintsOnly] = useState(true);
+  // Spoiler-free by default: the hints are enough to hunt with. Pangrams can
+  // be revealed on their own, since they're the hardest words to find.
+  const [showPangrams, setShowPangrams] = useState(false);
+  const [showAllWords, setShowAllWords] = useState(false);
   const outerInput = useRef<HTMLInputElement>(null);
 
   const letters = center + outer;
@@ -129,14 +130,36 @@ function App() {
               <label>
                 <input
                   type="checkbox"
-                  checked={hintsOnly}
-                  onChange={(e) => setHintsOnly(e.target.checked)}
+                  checked={showPangrams}
+                  onChange={(e) => setShowPangrams(e.target.checked)}
                 />
-                Hints only (hide the word list)
+                Show pangrams
               </label>
             </div>
-            {!hintsOnly && (
-              <ul className="word-list">
+            <div className="form__check">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={showAllWords}
+                  onChange={(e) => setShowAllWords(e.target.checked)}
+                />
+                Show all words
+              </label>
+            </div>
+            {showPangrams &&
+              (pangrams.length > 0 ? (
+                <ul className="word-list" aria-label="Pangrams">
+                  {pangrams.map((word) => (
+                    <li key={word} className="word word--pangram">
+                      <strong>{word}</strong>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="stats">No pangrams.</p>
+              ))}
+            {showAllWords && (
+              <ul className="word-list" aria-label="All words">
                 {words.map((word) =>
                   pangrams.includes(word) ? (
                     <li key={word} className="word word--pangram">

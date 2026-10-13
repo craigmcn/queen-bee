@@ -87,10 +87,12 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   Tests that need results must wait for them (`findBy…`);
   `src/App.loading.test.tsx` mocks the import per test with `vi.doMock`,
   since a hoisted `vi.mock` stays cached across `vi.resetModules()`.
-  `LetterGridTable` shows "-" for zero cells like the NYT grid. A "Hints only"
-  checkbox, **checked by default**, hides the word list (not the counts) for
-  spoiler-free hunting. Tests of the list uncheck it first (`showWordList` in
-  `App.test.tsx` and `e2e/queen-bee.spec.ts`).
+  `LetterGridTable` shows "-" for zero cells like the NYT grid. The words
+  are hidden by default (counts and hints stay) for spoiler-free hunting:
+  "Show pangrams" reveals a separate pangram list, "Show all words" the full
+  list (pangrams highlighted); both start **unchecked**. Tests of the full
+  list check it first (`showWordList` in `App.test.tsx` and
+  `e2e/queen-bee.spec.ts`).
 - **Styling:** albertcss v0.18.0 via CDN link in `index.html` (container,
   `form__*`, `button`, `table--sm table--bordered`, `visually-hidden`), which
   also provides light/dark theming through `light-dark()` tokens. App CSS only

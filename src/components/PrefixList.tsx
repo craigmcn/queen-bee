@@ -1,10 +1,6 @@
-import type { buildPrefixCounts } from "../lib/spellingBee";
+import type { PrefixGroup } from "../lib/spellingBee";
 
-export function PrefixList({
-  groups,
-}: {
-  groups: ReturnType<typeof buildPrefixCounts>;
-}) {
+export function PrefixList({ groups }: { groups: PrefixGroup[] }) {
   return (
     <ul className="prefix-list">
       {groups.map(({ letter, prefixes }) => (

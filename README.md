@@ -4,7 +4,7 @@ An NYT Spelling Bee helper to achieve Queen Bee status.
 
 Enter the puzzle's center letter and six outer letters to see:
 
-- total words, points and pangrams, and every word of four or more letters that uses the center letter (pangrams highlighted)
+- total words, points and pangrams (once all seven letters are in), and every word of four or more letters that uses the center letter (pangrams highlighted)
 - a starting letter × word length grid, like the NYT Spelling Bee hints
 - a two-letter list of how many words start with each two-letter prefix
 - the word list hidden by default so you can hunt with just the hints; "Show pangrams" reveals only the pangrams, and "Show all words" reveals every word

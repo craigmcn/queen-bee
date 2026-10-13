@@ -69,15 +69,18 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   deliberate tripwire: it checks real NYT verdicts for one puzzle, so a red
   refresh PR there means NYT changed a guarded word. Confirm the change and
   update the test in that PR (the PR description says so too).
-- **Logic:** `src/lib/spellingBee.ts` — `findWords`, `isPangram` (needs all
-  seven letters entered, so partial input shows no pangrams), `scoreWord` (NYT scoring: 4-letter = 1, else length, +7
+- **Logic:** `src/lib/spellingBee.ts` — `findWords`, `isComplete` (all seven
+  letters entered), `isPangram` (needs `isComplete`, so partial input shows no
+  pangrams), `scoreWord` (NYT scoring: 4-letter = 1, else length, +7
   pangram bonus), `buildLetterGrid`, `buildPrefixCounts`.
-- **UI:** `src/App.tsx` owns the two letter inputs; entering a letter as the
-  center removes it from the outer letters, and outer letters are de-duplicated
-  and capped at six in state. There's deliberately no `maxLength`, which counts
+- **UI:** `src/App.tsx` composes the page. The letter inputs' state lives in
+  `src/hooks/useLetters.ts`: entering a letter as the center removes it from
+  the outer letters (a new center letter is taken wherever the cursor was),
+  and outer letters are de-duplicated and capped at six in state. There's deliberately no `maxLength`, which counts
   characters and would cut off a pasted "K, N, C, A, E, D". Typing a center
   letter moves focus to Outer letters (not on Backspace), so a puzzle can be
-  typed straight through. Results appear once a center letter is entered.
+  typed straight through; Clear returns focus to Center letter. Results
+  appear once a center letter is entered.
   The word list is lazy-loaded (`src/data/useWordList.ts`, dynamic `import()`
   on mount) as its own chunk, so the form renders without waiting for it
   (entry chunk ~71 kB gzipped vs ~112 kB for the words). Until it arrives,
@@ -90,8 +93,10 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   `LetterGridTable` shows "-" for zero cells like the NYT grid. The words
   are hidden by default (counts and hints stay) for spoiler-free hunting:
   "Show pangrams" reveals a separate pangram list (or asks for all seven
-  letters first), "Show all words" the full list (pangrams highlighted); each
-  has a visible `h3` that names it, and both start **unchecked**. Tests of the full
+  letters first), "Show all words" the full list (pangrams highlighted). Both
+  render `src/components/WordList.tsx`, whose visible `h3` names the list;
+  both toggles start **unchecked**. The stats line leaves out the pangram
+  count until all seven letters are entered, since "0" would read as "none". Tests of the full
   list check it first (`showWordList` in `App.test.tsx` and
   `e2e/queen-bee.spec.ts`).
 - **Styling:** albertcss v0.18.0 via CDN link in `index.html` (container,

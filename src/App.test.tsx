@@ -51,8 +51,13 @@ describe("App", () => {
     await showWordList(await enterLetters("t", "acre"));
     expect(screen.getByText("crate")).toBeInTheDocument();
 
-    expect(screen.getByText(/0 pangrams/)).toBeInTheDocument();
+    expect(screen.queryByText(/\d+ pangrams?/)).not.toBeInTheDocument();
     expect(screen.queryByText(/\(pangram\)/)).not.toBeInTheDocument();
+  });
+
+  it("counts pangrams once all seven letters are entered", async () => {
+    await enterLetters("t", "acreln");
+    expect(screen.getByText(/· [1-9]\d* pangrams?$/)).toBeInTheDocument();
   });
 
   it("moves focus to Outer letters once a center letter is typed", async () => {
@@ -162,5 +167,6 @@ describe("App", () => {
     await user.click(screen.getByRole("button", { name: "Clear" }));
     expect(screen.getByLabelText("Center letter")).toHaveValue("");
     expect(screen.getByLabelText("Outer letters")).toHaveValue("");
+    expect(screen.getByLabelText("Center letter")).toHaveFocus();
   });
 });

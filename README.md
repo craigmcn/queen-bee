@@ -7,7 +7,7 @@ Enter the puzzle's center letter and six outer letters to see:
 - total words, points and pangrams, and every word of four or more letters that uses the center letter (pangrams highlighted)
 - a starting letter × word length grid, like the NYT Spelling Bee hints
 - a two-letter list of how many words start with each two-letter prefix
-- a "Hints only" toggle, on by default, that keeps the word list hidden so you can hunt with just the hints; uncheck it to see every word
+- the word list hidden by default so you can hunt with just the hints; "Show pangrams" reveals only the pangrams, and "Show all words" reveals every word
 
 ## Word list
 

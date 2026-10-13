@@ -1,8 +1,8 @@
 import { test, expect, type Page } from "@playwright/test";
 
-// The word list starts hidden (hints only), so tests of the list reveal it.
+// The word lists start hidden, so tests of them reveal them.
 async function showWordList(page: Page) {
-  await page.getByLabel(/hints only/i).uncheck();
+  await page.getByLabel("Show all words").check();
 }
 
 test("finds words, pangrams, and hints for a puzzle", async ({ page }) => {
@@ -54,13 +54,23 @@ for (const colorScheme of ["light", "dark"] as const) {
   });
 }
 
-test("hides the word list until Hints only is unchecked", async ({ page }) => {
+test("hides the word lists until they're asked for", async ({ page }) => {
   await page.goto("/");
   await page.getByLabel("Center letter").fill("t");
   await page.getByLabel("Outer letters").fill("acreln");
 
   await expect(page.getByRole("table")).toBeVisible();
+  await expect(page.getByText("central", { exact: true })).toHaveCount(0);
   await expect(page.getByText("tract", { exact: true })).toHaveCount(0);
+
+  await page.getByLabel("Show pangrams").check();
+  await expect(
+    page
+      .getByRole("list", { name: "Pangrams" })
+      .getByText("central", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("tract", { exact: true })).toHaveCount(0);
+
   await showWordList(page);
   await expect(page.getByText("tract", { exact: true })).toBeVisible();
 });

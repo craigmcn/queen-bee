@@ -89,8 +89,9 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   since a hoisted `vi.mock` stays cached across `vi.resetModules()`.
   `LetterGridTable` shows "-" for zero cells like the NYT grid. The words
   are hidden by default (counts and hints stay) for spoiler-free hunting:
-  "Show pangrams" reveals a separate pangram list, "Show all words" the full
-  list (pangrams highlighted); both start **unchecked**. Tests of the full
+  "Show pangrams" reveals a separate pangram list (or asks for all seven
+  letters first), "Show all words" the full list (pangrams highlighted); each
+  has a visible `h3` that names it, and both start **unchecked**. Tests of the full
   list check it first (`showWordList` in `App.test.tsx` and
   `e2e/queen-bee.spec.ts`).
 - **Styling:** albertcss v0.18.0 via CDN link in `index.html` (container,

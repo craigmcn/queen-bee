@@ -132,10 +132,29 @@ describe("App", () => {
     expect(screen.queryByText("tract")).not.toBeInTheDocument();
   });
 
-  it("says so when there are no pangrams to show", async () => {
+  it("asks for all seven letters before showing pangrams", async () => {
     const user = await enterLetters("t", "acre");
     await user.click(screen.getByLabelText("Show pangrams"));
-    expect(screen.getByText("No pangrams.")).toBeInTheDocument();
+    expect(
+      screen.getByText("Enter all seven letters to see pangrams."),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("No pangrams.")).not.toBeInTheDocument();
+  });
+
+  it("heads each revealed list", async () => {
+    const user = await enterLetters("t", "acreln");
+    expect(
+      screen.queryByRole("heading", { name: "Pangrams" }),
+    ).not.toBeInTheDocument();
+
+    await user.click(screen.getByLabelText("Show pangrams"));
+    await showWordList(user);
+    expect(
+      screen.getByRole("heading", { name: "Pangrams" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "All words" }),
+    ).toBeInTheDocument();
   });
 
   it("clears the letters", async () => {

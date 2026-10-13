@@ -57,9 +57,9 @@ function App() {
     <main id="queen-bee" className="container">
       <h1>Queen Bee</h1>
       <p className="instructions">
-        Enter the puzzle&rsquo;s center letter and its six outer letters to see
-        every word of four or more letters. Pangrams (words using every letter)
-        are highlighted.
+        Enter the puzzle&rsquo;s center letter and its six outer letters to get
+        NYT-style hints, then reveal the pangrams (words using every letter) or
+        every word when you want them.
       </p>
 
       <form className="letters form" onSubmit={(e) => e.preventDefault()}>
@@ -146,33 +146,50 @@ function App() {
                 Show all words
               </label>
             </div>
-            {showPangrams &&
-              (pangrams.length > 0 ? (
-                <ul className="word-list" aria-label="Pangrams">
-                  {pangrams.map((word) => (
-                    <li key={word} className="word word--pangram">
-                      <strong>{word}</strong>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="stats">No pangrams.</p>
-              ))}
-            {showAllWords && (
-              <ul className="word-list" aria-label="All words">
-                {words.map((word) =>
-                  pangrams.includes(word) ? (
-                    <li key={word} className="word word--pangram">
-                      <strong>{word}</strong>
-                      <span className="visually-hidden"> (pangram)</span>
-                    </li>
-                  ) : (
-                    <li key={word} className="word">
-                      {word}
-                    </li>
-                  ),
+            {showPangrams && (
+              <>
+                <h3 id="pangrams-heading" className="word-list__heading">
+                  Pangrams
+                </h3>
+                {/* Pangrams need all seven letters, so "none" isn't final
+                    until the outer letters are complete. */}
+                {outer.length < OUTER_LETTER_COUNT ? (
+                  <p className="stats">
+                    Enter all seven letters to see pangrams.
+                  </p>
+                ) : pangrams.length > 0 ? (
+                  <ul className="word-list" aria-labelledby="pangrams-heading">
+                    {pangrams.map((word) => (
+                      <li key={word} className="word word--pangram">
+                        <strong>{word}</strong>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="stats">No pangrams.</p>
                 )}
-              </ul>
+              </>
+            )}
+            {showAllWords && (
+              <>
+                <h3 id="all-words-heading" className="word-list__heading">
+                  All words
+                </h3>
+                <ul className="word-list" aria-labelledby="all-words-heading">
+                  {words.map((word) =>
+                    pangrams.includes(word) ? (
+                      <li key={word} className="word word--pangram">
+                        <strong>{word}</strong>
+                        <span className="visually-hidden"> (pangram)</span>
+                      </li>
+                    ) : (
+                      <li key={word} className="word">
+                        {word}
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </>
             )}
           </section>
 

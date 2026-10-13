@@ -3,6 +3,7 @@ import {
   buildLetterGrid,
   buildPrefixCounts,
   findWords,
+  isComplete,
   isPangram,
   sanitizeLetters,
   scoreWord,
@@ -49,6 +50,13 @@ describe("findWords", () => {
 
   it("excludes words missing the center letter", () => {
     expect(findWords(WORDS, "c", "are")).toEqual(["acre", "care"]);
+  });
+});
+
+describe("isComplete", () => {
+  it("needs the center and all six outer letters", () => {
+    expect(isComplete("tacreln")).toBe(true);
+    expect(isComplete("tacrel")).toBe(false);
   });
 });
 

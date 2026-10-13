@@ -21,12 +21,16 @@ export function findWords(
   );
 }
 
+/** True once the center and all six outer letters are entered. */
+export function isComplete(letters: string): boolean {
+  return letters.length === OUTER_LETTER_COUNT + 1;
+}
+
 // NYT pangrams use all seven letters, so none count until every letter is
 // entered; otherwise partial input would inflate highlights and points.
 export function isPangram(word: string, letters: string): boolean {
   return (
-    letters.length === OUTER_LETTER_COUNT + 1 &&
-    [...letters].every((letter) => word.includes(letter))
+    isComplete(letters) && [...letters].every((letter) => word.includes(letter))
   );
 }
 
@@ -65,17 +69,20 @@ export function buildLetterGrid(words: readonly string[]): LetterGrid {
   return { lengths, rows, columnTotals, total: words.length };
 }
 
+export interface PrefixGroup {
+  letter: string;
+  prefixes: { prefix: string; count: number }[];
+}
+
 /** Word counts by two-letter prefix, grouped by first letter. */
-export function buildPrefixCounts(
-  words: readonly string[],
-): { letter: string; prefixes: { prefix: string; count: number }[] }[] {
+export function buildPrefixCounts(words: readonly string[]): PrefixGroup[] {
   const counts = new Map<string, number>();
   for (const word of [...words].sort()) {
     const prefix = word.slice(0, 2);
     counts.set(prefix, (counts.get(prefix) ?? 0) + 1);
   }
 
-  const groups = new Map<string, { prefix: string; count: number }[]>();
+  const groups = new Map<string, PrefixGroup["prefixes"]>();
   for (const [prefix, count] of counts) {
     const group = groups.get(prefix[0]) ?? [];
     group.push({ prefix, count });

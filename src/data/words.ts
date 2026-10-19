@@ -144,57 +144,57 @@ angelic angelica anger angered angering angerly angina angiogenic angiogram
 angioma angiomata angle angled angler anglicizing angling angora angrier
 angrily angry anguine angular angularly angulating anhedonia anima animal
 animalcula animalculum animalier animality animalize animalizing animallike
-animally animate animated animater animating animation animator anime anion
-ankerite ankh ankle anklebone anklet annal annatto anneal annealed annealer
-annealing annelid annelidan annex annexation annexed annexing annihilate
-annihilating annihilation annotate annotated annotating annotation annotative
-annotator announce announced announcer announcing annoy annoyance annoyed
-annoyer annoying annoyingly annual annualize annualizing annually annuity
-annul annular annularly annulation annuli annulled annulling annulment
-annunciate annunciating annunciation anodally anode anodization anodize
-anodized anodizing anodyne anodynic anoint anointed anointer anointing
-anointment anolyte anomaly anomie anon anonymity anorak anorexia anorexy
-another anovular anoxemia anoxia anoxic antacid antagonizing antalgic
-antarctic antbear ante anteater antecede anteceded antecedence antecedent
-anted antedate antedated antedating antefix antefixa antefixae anteing
-antelope antemortem antenatal antenna antennae antennular antependia
-antepenult anterior anteroom antevert anteverted anthem anthemed anthemia
-anther antheral anthill anthocyan anthozoan anthracene anthracitic anthrax
-anti antiabortion antiaircraft antianxiety antiarthritic antiauxin antibiotic
-antibug antic anticancer anticipant anticipate anticipating anticipation
-anticlimactic anticline anticling anticolonial anticrack antidora antidote
-antidoted antidraft antiemetic antifa antifeminine antiflu antifoam
-antifogging antifur antigen antigene antigenic antihuman antihunting antijam
-antijamming antikickback antiking antiknock antileak antiliterate antilitter
-antilog antimalaria antimalarial antimale antimanagement antimatter antimere
-antimonial antimony antinarrative antinatural antinature antinode antinuke
-antioxidant antiparty antipathy antiphon antipope antiporn antiproton
-antiquarian antiquate antiquating antiquation antique antiquing antiquity
-antirachitic antirape antirational antired antiroll antitank antitheft
-antitotalitarian antitoxin antitype antiunion antiurban antiviral antiwar
-antiwear antiweed antiwhite antiwoman antler antlered antlike antonym antonymy
-antre antrum anvil anviled anvilled anxiety anybody anyhoo anyhow anymore
-anyone anyplace anything anytime anyway anywhere aorta aortae aortal aortic
-apace apagogic aparejo apart apartment apathetic apathy aped apelike apeman
-apemen aper apercu aperient aperitif aperture apery apex aphanite aphanitic
-aphelian aphid apholate aphonia aphonic aphotic apian apiary apically apiculi
-apiece aping apiology aplenty aplite aplomb apnea apnoeic apocarpy apocrypha
-apodictic apogamic apogean apogee apogeic apolitical apologia apologiae
-apologue apology apolune apomict apomictic apophyge apoplexy apothece apothem
-appall appalled appalling appallingly apparat apparel appareled apparelled
-apparent apparition appeal appealable appealed appealer appealing appear
-appearance appeared appearing appellant appellate appellee appellor append
-appendage appendant appended appending appendix apperceive appertain appetency
-appetite appetitive appetize appetizer applaud applaudable applaudably
-applauded applauder apple applecart applejack applet appliance applicable
-applicant applied applier applique apply applying appoint appointee appointing
-apportion appreciate apprehend apprehended apprize apprized apprizer apprizing
-approach approbate approbatory appropriate appropriation approval approve
-approved approver appurtenant apraxia apraxic apricot apron aproned aproning
-apter apteral apteria apteryx aptitude aptly aqua aquacade aquacultural
-aquanaut aquaplane aquarelle aquaria aquarial aquarian aquarium aquas aquatic
-aquatint aquatinting aquatone aquavit aqueduct aquifer aquilegia aquiline
-aquiver arabica arabicize arability arabize arabized arabizing arable arachnid
+animate animated animater animating animation animator anime anion ankerite
+ankh ankle anklebone anklet annal annatto anneal annealed annealer annealing
+annelid annelidan annex annexation annexed annexing annihilate annihilating
+annihilation annotate annotated annotating annotation annotative annotator
+announce announced announcer announcing annoy annoyance annoyed annoyer
+annoying annoyingly annual annualize annualizing annually annuity annul
+annular annularly annulation annuli annulled annulling annulment annunciate
+annunciating annunciation anodally anode anodization anodize anodized
+anodizing anodyne anodynic anoint anointed anointer anointing anointment
+anolyte anomaly anomie anon anonymity anorak anorexia anorexy another anovular
+anoxemia anoxia anoxic antacid antagonizing antalgic antarctic antbear ante
+anteater antecede anteceded antecedence antecedent anted antedate antedated
+antedating antefix antefixa antefixae anteing antelope antemortem antenatal
+antenna antennae antennular antependia antepenult anterior anteroom antevert
+anteverted anthem anthemed anthemia anther antheral anthill anthocyan
+anthozoan anthracene anthracitic anthrax anti antiabortion antiaircraft
+antianxiety antiarthritic antiauxin antibiotic antibug antic anticancer
+anticipant anticipate anticipating anticipation anticlimactic anticline
+anticling anticolonial anticrack antidora antidote antidoted antidraft
+antiemetic antifa antifeminine antiflu antifoam antifogging antifur antigen
+antigene antigenic antihuman antihunting antijam antijamming antikickback
+antiking antiknock antileak antiliterate antilitter antilog antimalaria
+antimalarial antimale antimanagement antimatter antimere antimonial antimony
+antinarrative antinatural antinature antinode antinuke antioxidant antiparty
+antipathy antiphon antipope antiporn antiproton antiquarian antiquate
+antiquating antiquation antique antiquing antiquity antirachitic antirape
+antirational antired antiroll antitank antitheft antitotalitarian antitoxin
+antitype antiunion antiurban antiviral antiwar antiwear antiweed antiwhite
+antiwoman antler antlered antlike antonym antonymy antre antrum anvil anviled
+anvilled anxiety anybody anyhoo anyhow anymore anyone anyplace anything
+anytime anyway anywhere aorta aortae aortal aortic apace apagogic aparejo
+apart apartment apathetic apathy aped apelike apeman apemen aper apercu
+aperient aperitif aperture apery apex aphanite aphanitic aphelian aphid
+apholate aphonia aphonic aphotic apian apiary apically apiculi apiece aping
+apiology aplenty aplite aplomb apnea apnoeic apocarpy apocrypha apodictic
+apogamic apogean apogee apogeic apolitical apologia apologiae apologue apology
+apolune apomict apomictic apophyge apoplexy apothece apothem appall appalled
+appalling appallingly apparat apparel appareled apparelled apparent apparition
+appeal appealable appealed appealer appealing appear appearance appeared
+appearing appellant appellate appellee appellor append appendage appendant
+appended appending appendix apperceive appertain appetency appetite appetitive
+appetize appetizer applaud applaudable applaudably applauded applauder apple
+applecart applejack applet appliance applicable applicant applied applier
+applique apply applying appoint appointee appointing apportion appreciate
+apprehend apprehended apprize apprized apprizer apprizing approach approbate
+approbatory appropriate appropriation approval approve approved approver
+appurtenant apraxia apraxic apricot apron aproned aproning apter apteral
+apteria apteryx aptitude aptly aqua aquacade aquacultural aquanaut aquaplane
+aquarelle aquaria aquarial aquarian aquarium aquas aquatic aquatint
+aquatinting aquatone aquavit aqueduct aquifer aquilegia aquiline aquiver
+arabica arabicize arability arabize arabized arabizing arable arachnid
 arancini araneid arbiter arbitrable arbitrage arbitrager arbitraging
 arbitrarily arbitrary arbitrate arbitrated arbitrating arbitration arbitrative
 arbitrator arbor arboreal arboreally arbored arboreta arborio arborize
@@ -2113,11 +2113,11 @@ jellified jellify jelling jelly jellybean jellying jellylike jemadar jemidar
 jemmied jemmying jenny jeopard jeoparded jerboa jereed jeremiad jerid jerk
 jerked jerker jerkier jerkily jerkin jerking jerkwater jerky jeroboam jerreed
 jerrican jerrid jerry jerrycan jetbead jete jetlike jetliner jetport jetted
-jettied jettier jetting jetty jettying jeux jewed jewel jeweled jeweler
-jeweling jewelled jeweller jewellery jewellike jewelling jewelry jewelweed
-jewing jezail jezebel jibbed jibber jibbing jibboom jibe jibed jiber jibing
-jibingly jicama jiff jiffy jigaboo jigged jigger jiggered jiggering jigging
-jiggle jiggled jigglier jiggling jiggly jiggy jihad jillion jilt jilted jilter
+jettier jetting jetty jettying jeux jewed jewel jeweled jeweler jeweling
+jewelled jeweller jewellery jewellike jewelling jewelry jewelweed jewing
+jezail jezebel jibbed jibber jibbing jibboom jibe jibed jiber jibing jibingly
+jicama jiff jiffy jigaboo jigged jigger jiggered jiggering jigging jiggle
+jiggled jigglier jiggling jiggly jiggy jihad jillion jilt jilted jilter
 jilting jiminy jimmied jimminy jimmy jimmying jimp jimper jimply jimpy jingal
 jingall jingko jingle jingled jingler jinglier jingling jingly jingo jink
 jinked jinker jinking jinn jinni jinx jinxed jinxing jipijapa jitney jitter
@@ -2378,12 +2378,12 @@ maned maneuver maneuverer manful manfully manga mangabey mangaby manganite
 mange manger mangey mangier mangily mangle mangled mangler mangling mango
 mangold mangonel mangy manhandle manhandled manhattan manhole manhood manhunt
 mania maniac maniacal maniacally manic manically manicotti manihot manikin
-manila maniple manitou mankind manlier manlike manlily manly manmade manna
-manned mannequin manner mannered mannerly manning mannitol manometer manor
-manorial manpack manque manrope manta manteau manteaux mantel mantilla mantle
-mantled mantling mantra mantrap mantric manual manually manuary manubria
-manubrium manumit manumitting manure manured manurer manurial manuring manward
-many manzanita maple maplike mapmaker mapmaking mapped mapper mapping maquette
+manila maniple manitou mankind manlier manlike manly manmade manna manned
+mannequin manner mannered mannerly manning mannitol manometer manor manorial
+manpack manque manrope manta manteau manteaux mantel mantilla mantle mantled
+mantling mantra mantrap mantric manual manually manuary manubria manubrium
+manumit manumitting manure manured manurer manurial manuring manward many
+manzanita maple maplike mapmaker mapmaking mapped mapper mapping maquette
 maqui marabou marabout maraca marathon maraud marauded marauder maravedi
 marble marbled marbler marblier marbly marcel marcelled march marched marchen
 marcher mare maremma maremme marengo margarine margarita margarite margay

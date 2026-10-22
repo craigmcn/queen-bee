@@ -675,22 +675,22 @@ checkoff checkout checkrein checkroom checkrow checkup cheddar cheder
 cheechako cheek cheekbone cheekful cheekier cheekily cheeky cheep cheeped
 cheeper cheeping cheer cheered cheerer cheerful cheerfuller cheerier cheerily
 cheering cheerio cheerlead cheerleader cheerled cheerly cheero cheery cheetah
-chef chefdom cheffed cheffing chelatable chelated chelicera chelicerae
-cheliceral cheliped cheloid chemical chemo chenille chenopod cheque chequer
-chequered cheroot cherry chert chertier cherty cherub cherubic chervil chetrum
-chevalet chevelure cheveron chevied cheviot chevre chevron chevy chew chewable
-chewed chewer chewier chewing chewink chewy chez chia chianti chibouk chic
-chica chicaner chicer chichi chick chickadee chickaree chicken chickened
-chickening chickpea chickweed chicle chicly chicory chide chided chider
-chiding chief chiefer chiefly chiffchaff chiffon chigetai chigger chignon
-chihuahua child childbed childhood childing childlier childlike childly chili
-chiliad chill chilled chiller chillier chilling chillingly chillum chilly
-chilopod chimaera chimaeric chimb chimbly chime chimed chimer chimera chimere
-chimeric chimichanga chiming chimley chimney chimp chin china chinbone
-chincherinchee chinchier chinchilla chinkapin chinked chinkier chinky chinned
-chinning chino chintz chintzy chip chipmuck chipped chipper chippered chippier
-chipping chippy chirked chirker chirking chirmed chirming chirp chirped
-chirper chirpier chirpily chirping chirpy chirre chirred chirrup chirrupy chit
+chef chefdom cheffed cheffing chelated chelicera chelicerae cheliceral
+cheliped cheloid chemical chemo chenille chenopod cheque chequer chequered
+cheroot cherry chert chertier cherty cherub cherubic chervil chetrum chevalet
+chevelure cheveron chevied cheviot chevre chevron chevy chew chewable chewed
+chewer chewier chewing chewink chewy chez chia chianti chibouk chic chica
+chicaner chicer chichi chick chickadee chickaree chicken chickened chickening
+chickpea chickweed chicle chicly chicory chide chided chider chiding chief
+chiefer chiefly chiffchaff chiffon chigetai chigger chignon chihuahua child
+childbed childhood childing childlier childlike childly chili chiliad chill
+chilled chiller chillier chilling chillingly chillum chilly chilopod chimaera
+chimaeric chimb chimbly chime chimed chimer chimera chimere chimeric
+chimichanga chiming chimley chimney chimp chin china chinbone chincherinchee
+chinchier chinchilla chinkapin chinked chinkier chinky chinned chinning chino
+chintz chintzy chip chipmuck chipped chipper chippered chippier chipping
+chippy chirked chirker chirking chirmed chirming chirp chirped chirper
+chirpier chirpily chirping chirpy chirre chirred chirrup chirrupy chit
 chitchat chitchatted chitchatting chitin chitlin chiton chitter chittered
 chivalric chivaree chive chivied chivvied chivvy chivvying chivy chivying
 chloral chlorella chloric chlorid chlorin chloritic chloroform chlorophyll
@@ -1814,14 +1814,14 @@ hardy hare harebell hared hareem harelike harelip harem haricot harijan hark
 harked harken harkened harkener harking harlot harlotry harm harmed harmer
 harmful harmine harming harmony harp harped harper harping harpoon harpooner
 harpy harridan harried harrier harrow harrowed harrower harrumph harry
-harrying hart harumph hatband hatbox hatch hatchable hatchback hatched
-hatcheled hatchelled hatcher hatchery hatchet hatching hatchway hate hateable
-hated hateful hater hath hatha hating hatlike hatmaker hatpin hatrack hatred
-hatted hatter hatteria hauberk haughty haul haulage hauled hauler haulier
-hauling haulmy haulyard haunch haunched haunt haunted haunter haunting hautboy
-haute hauteur havarti havdalah have haven havened havening haver havered
-haverel having havior haviour havoc hawed hawfinch hawing hawk hawkbill hawked
-hawker hawkey hawkeyed hawkie hawking hawklike hawkweed hawthorn haycock hayer
+harrying hart harumph hatband hatbox hatch hatchback hatched hatcheled
+hatchelled hatcher hatchery hatchet hatching hatchway hate hateable hated
+hateful hater hath hatha hating hatlike hatmaker hatpin hatrack hatred hatted
+hatter hatteria hauberk haughty haul haulage hauled hauler haulier hauling
+haulmy haulyard haunch haunched haunt haunted haunter haunting hautboy haute
+hauteur havarti havdalah have haven havened havening haver havered haverel
+having havior haviour havoc hawed hawfinch hawing hawk hawkbill hawked hawker
+hawkey hawkeyed hawkie hawking hawklike hawkweed hawthorn haycock hayer
 hayfork haying haylage hayloft haymaker haymow hayrack hayrick hayride hayward
 haywire hazan hazanim hazard hazarded haze hazed hazel hazelhen hazelly hazer
 hazier hazily hazing hazy hazzan hazzanim head headache headachier headachy
@@ -2809,98 +2809,98 @@ panoche panoply panoptic panorama pant pantalone pantaloon panted pantheon
 panther pantie pantile panting pantoum pantry pantryman panty panzer papa
 papacy papal papally paparazzi paparazzo papaverine papaw papaya paper
 paperback paperboard paperboy papered paperer paperhanger papering papermaker
-paperwork papery papeterie papilla papillae papillate papilloma papillon
-papillote pappier pappy paprika papyri papyrian papyrine papyrology parable
-parabola parachor parade paraded parader paradiddle paradigm parading paradox
-paradrop paradropped paraffin paraffinic paraffining paraform paragoge paragon
-paragoning paragraph paragraphed paragrapher paragraphing parakeet parakite
-paralegal parallax parallel paralleled parallelepiped parallelled paralyze
-paralyzer paramecia parament paramenta parameter paramour paramylum paranoea
-paranoia paranoiac paranoic paranoid paranormal paranymph parapet parapeted
-paraplegia parapodial paraquat paraquet paratha paratroop paratrooper paravane
-parazoan parboil parcel parceled parcelled parcenary parcener parch parched
-pardee pardie pardine pardner pardon pardoned pardoner pare pared pareira
-parent parentage parental parented parenteral pareo parer parerga parergon
-paretic pareu pareve parfait parfocal parge parged parget pargeted pargetted
-parhelia pariah parietal paring parity park parka parked parker parking
-parkland parklike parkway parlance parlando parlante parlay parlayed parle
-parled parley parleyed parleyer parling parlor parmigiana parodic parodied
-parody parol parole paroled parolee paronym parotid parotoid parquet parrakeet
-parred parrel parricidal parricide parridge parried parritch parroket parrot
-parroted parroter parry parrying part partake partaken partaker parted
-parterre partial partiality partially participant participate partied partier
-parting partita partite partition partitive partizan partlet partly partner
-partnered parton partook partway party partyer parure parve parvenu parvenue
-parvo patagial patagium patch patched patcher patchy pate patella patellae
-patellar patency patent patentable patented patentee patenting patently
-patentor pater paternal path pathetic pathway patience patient patienter
-patina patinated patined patinize patinizing patio patly patriarch patrician
-patriciate patriot patriotic patrol patroller patron patronal patroon patted
-patter pattered patterer pattern patterned patting patty patulent patzer
-paucity paughty paunch paunchy pauper paupered pauperize paupiette pavane pave
-paved paveed pavement paver pavilion paving pavior paviour pavlova pavonine
-pawed pawer pawing pawkier pawkily pawky pawl pawn pawnable pawnage pawned
-pawnee pawner pawning pawnor pawpaw paxwax payable payback paycheck payday
-payee payer paygrade paying payload payment paynim payoff payola payout
-payphone payroll peace peaceable peaceably peaceful peacekeeper peacemaker
-peacenik peacetime peach peacher peachier peachy peacing peacoat peacock
-peacocked peacocky peafowl peahen peak peaked peakier peaking peaklike peaky
-peal pealed pealike pealing peanut peapod pear pearl pearled pearler pearlier
-pearlite pearly pearmain peart pearter peartly peat peatier peaty peavey peavy
-pebble pebbled pebblier pebbling pebbly pecan peccancy peccary pechan peching
-peck pecked pecker peckier pecking pecorini pecorino pectin pectize pectized
-peculate peculia peculium pedagogue pedagogy pedal pedaled pedalfer pedalier
-pedalo pedant pedately peddle peddled peddler peddlery peddling pedicab
-pedicure pedicured pedigree pedigreed pediment pedlar pedlary pedler pedlery
-pedocal pedology pedometer pedophile pedro peduncle peduncled peed peeing peek
-peekaboo peeked peeking peel peelable peeled peeler peeling peen peep peeped
-peeper peephole peeping peer peerage peered peerie peering peery peetweet
-peeve peeved peeving peewee peewit pegbox pegged pegging peglike pegmatite
-peignoir peke pekoe pelagial pelagic pelecypod pelerine pelf pelican pellagra
-pellet pelleted pelleting pelletize pelletized pelletizer pellicle pellucid
-peloria peloric peloton pelt pelted pelter peltered pelting peltry pelvic
-pembina pemican pemmican pemoline pemphix penal penalize penally penalty
-penance penancing pence penchant pencil penciled penciler penciling pencilling
-pend pendant pended pendency pendent pendentive pending pendulum penetrance
-penetrant penetrate penetrated penetrometer penguin penicillin penile
-penitence penitent penitential penitently penknife penman penmen pennant
-pennated penne penned penner penning pennoncel penny penoche penology penoncel
-penpoint pent pentacle pentad pentagon pentameter pentane pentanol
-pentapeptide pentathlete pentavalent pentimento pentode penuche penuchi
-penuchle penuckle penult penury peon peonage peony people peopled peoplehood
-peopler peopling peperomia peperoni pepita peplum peponida peponium pepped
-pepper pepperbox peppercorn peppered pepperer peppering peppermint pepperoni
-peppertree peppery peppier pepping peppy peptic peptide peptizer peptizing
-peptonic peracid perborate percale perceive perceived perceiver percent
-percept perceptive perch perchance perched percher percipience percipient
-percoid perdie perdu perdue perdure perdured perdy perea peregrin peregrine
-pereia pereion pereiopod peremptory perennate perennated perennial pereon
-pereopod perfect perfecta perfected perfecter perfecto perfervid perfidy
-perforate perforator perforce perform performed performer perfume perfumed
-perfumer perfumery pergola peri periapt periblem pericardia pericarp pericopae
-pericope pericrania pericycle pericyclic periderm peridia peridial peridium
-peridot peridotite perigeal perigean perigee perigon perigyny perihelia
-perihelial perikarya peril periled periling perilla perilled perilling
-perilune perimeter perinea perineal perineum perineuria perineurium period
-periodic periodid periotic peripatetic peripeteia peripety peripheral
-periphery peripter perique periwig periwigged perjure perjured perjurer
-perjury perk perked perkier perkily perking perky perlite perlitic perm
-permanence permanent permeable permeant permeate permeated permed perming
-permit permitted permittee permitter permute permuted peroneal peroral
-perorally perorate perorated peroxid peroxide peroxided peroxy perpend
-perpended perpending perpent perpetrate perpetrated perpetrator perpetual
-perpetuate perpetuated perpetuator perpetuity perplex perplexed perplexedly
-perron perry pert pertain perter pertinence pertinent pertly perturb perturbed
-peruke peruked pervade pervaded pervader pervert perverted perverter petal
-petaled petaline petalled petallike petard peter petered petering petiolate
-petiole petioled petiolule petit petite petition petitioned petitioner
-petitioning petnapped petnapping petrale petrel petrified petrify petrol
-petronel petted petter petticoat pettier pettifog pettily petting pettling
-petty petulant petunia petuntze pewee pewit pewter pewterer peyote peytral
-peytrel pfennig pfennige pfft phaeton phage phalange phalangeal phalanx
-phalarope phalli phallic phallically phantom pharaoh pharma pharmacy pharynx
-phat phellogen phenacaine phenanthrene phenazin phenazine phenetic phenetol
-phenocopy phenol phenom phenomena phenomenon phenotype phenoxy phenyl
+paperwork papery papeterie papilla papillae papillary papillate papilloma
+papillon papillote pappier pappy paprika papyri papyrian papyrine papyrology
+parable parabola parachor parade paraded parader paradiddle paradigm parading
+paradox paradrop paradropped paraffin paraffinic paraffining paraform paragoge
+paragon paragoning paragraph paragraphed paragrapher paragraphing parakeet
+parakite paralegal parallax parallel paralleled parallelepiped parallelled
+paralyze paralyzer paramecia parament paramenta parameter paramour paramylum
+paranoea paranoia paranoiac paranoic paranoid paranormal paranymph parapet
+parapeted paraplegia parapodial paraquat paraquet paratha paratroop
+paratrooper paravane parazoan parboil parcel parceled parcelled parcenary
+parcener parch parched pardee pardie pardine pardner pardon pardoned pardoner
+pare pared pareira parent parentage parental parented parenteral pareo parer
+parerga parergon paretic pareu pareve parfait parfocal parge parged parget
+pargeted pargetted parhelia pariah parietal paring parity park parka parked
+parker parking parkland parklike parkway parlance parlando parlante parlay
+parlayed parle parled parley parleyed parleyer parling parlor parmigiana
+parodic parodied parody parol parole paroled parolee paronym parotid parotoid
+parquet parrakeet parred parrel parricidal parricide parridge parried parritch
+parroket parrot parroted parroter parry parrying part partake partaken
+partaker parted parterre partial partiality partially participant participate
+partied partier parting partita partite partition partitive partizan partlet
+partly partner partnered parton partook partway party partyer parure parve
+parvenu parvenue parvo patagial patagium patch patched patcher patchy pate
+patella patellae patellar patency patent patentable patented patentee
+patenting patently patentor pater paternal path pathetic pathway patience
+patient patienter patina patinated patined patinize patinizing patio patly
+patriarch patrician patriciate patriot patriotic patrol patroller patron
+patronal patroon patted patter pattered patterer pattern patterned patting
+patty patulent patzer paucity paughty paunch paunchy pauper paupered pauperize
+paupiette pavane pave paved paveed pavement paver pavilion paving pavior
+paviour pavlova pavonine pawed pawer pawing pawkier pawkily pawky pawl pawn
+pawnable pawnage pawned pawnee pawner pawning pawnor pawpaw paxwax payable
+payback paycheck payday payee payer paygrade paying payload payment paynim
+payoff payola payout payphone payroll peace peaceable peaceably peaceful
+peacekeeper peacemaker peacenik peacetime peach peacher peachier peachy
+peacing peacoat peacock peacocked peacocky peafowl peahen peak peaked peakier
+peaking peaklike peaky peal pealed pealike pealing peanut peapod pear pearl
+pearled pearler pearlier pearlite pearly pearmain peart pearter peartly peat
+peatier peaty peavey peavy pebble pebbled pebblier pebbling pebbly pecan
+peccancy peccary pechan peching peck pecked pecker peckier pecking pecorini
+pecorino pectin pectize pectized peculate peculia peculium pedagogue pedagogy
+pedal pedaled pedalfer pedalier pedalo pedant pedately peddle peddled peddler
+peddlery peddling pedicab pedicure pedicured pedigree pedigreed pediment
+pedlar pedlary pedler pedlery pedocal pedology pedometer pedophile pedro
+peduncle peduncled peed peeing peek peekaboo peeked peeking peel peelable
+peeled peeler peeling peen peep peeped peeper peephole peeping peer peerage
+peered peerie peering peery peetweet peeve peeved peeving peewee peewit pegbox
+pegged pegging peglike pegmatite peignoir peke pekoe pelagial pelagic
+pelecypod pelerine pelf pelican pellagra pellet pelleted pelleting pelletize
+pelletized pelletizer pellicle pellucid peloria peloric peloton pelt pelted
+pelter peltered pelting peltry pelvic pembina pemican pemmican pemoline
+pemphix penal penalize penally penalty penance penancing pence penchant pencil
+penciled penciler penciling pencilling pend pendant pended pendency pendent
+pendentive pending pendulum penetrance penetrant penetrate penetrated
+penetrometer penguin penicillin penile penitence penitent penitential
+penitently penknife penman penmen pennant pennated penne penned penner penning
+pennoncel penny penoche penology penoncel penpoint pent pentacle pentad
+pentagon pentameter pentane pentanol pentapeptide pentathlete pentavalent
+pentimento pentode penuche penuchi penuchle penuckle penult penury peon
+peonage peony people peopled peoplehood peopler peopling peperomia peperoni
+pepita peplum peponida peponium pepped pepper pepperbox peppercorn peppered
+pepperer peppering peppermint pepperoni peppertree peppery peppier pepping
+peppy peptic peptide peptizer peptizing peptonic peracid perborate percale
+perceive perceived perceiver percent percept perceptive perch perchance
+perched percher percipience percipient percoid perdie perdu perdue perdure
+perdured perdy perea peregrin peregrine pereia pereion pereiopod peremptory
+perennate perennated perennial pereon pereopod perfect perfecta perfected
+perfecter perfecto perfervid perfidy perforate perforator perforce perform
+performed performer perfume perfumed perfumer perfumery pergola peri periapt
+periblem pericardia pericarp pericopae pericope pericrania pericycle
+pericyclic periderm peridia peridial peridium peridot peridotite perigeal
+perigean perigee perigon perigyny perihelia perihelial perikarya peril periled
+periling perilla perilled perilling perilune perimeter perinea perineal
+perineum perineuria perineurium period periodic periodid periotic peripatetic
+peripeteia peripety peripheral periphery peripter perique periwig periwigged
+perjure perjured perjurer perjury perk perked perkier perkily perking perky
+perlite perlitic perm permanence permanent permeable permeant permeate
+permeated permed perming permit permitted permittee permitter permute permuted
+peroneal peroral perorally perorate perorated peroxid peroxide peroxided
+peroxy perpend perpended perpending perpent perpetrate perpetrated perpetrator
+perpetual perpetuate perpetuated perpetuator perpetuity perplex perplexed
+perplexedly perron perry pert pertain perter pertinence pertinent pertly
+perturb perturbed peruke peruked pervade pervaded pervader pervert perverted
+perverter petal petaled petaline petalled petallike petard peter petered
+petering petiolate petiole petioled petiolule petit petite petition petitioned
+petitioner petitioning petnapped petnapping petrale petrel petrified petrify
+petrol petronel petted petter petticoat pettier pettifog pettily petting
+pettling petty petulant petunia petuntze pewee pewit pewter pewterer peyote
+peytral peytrel pfennig pfennige pfft phaeton phage phalange phalangeal
+phalanx phalarope phalli phallic phallically phantom pharaoh pharma pharmacy
+pharynx phat phellogen phenacaine phenanthrene phenazin phenazine phenetic
+phenetol phenocopy phenol phenom phenomena phenomenon phenotype phenoxy phenyl
 pheromone phew phial philhellene philhellenic philibeg philippic philology
 philomel philter philtra philtre phimotic phiz phlegm phlegmy phloem phlox
 phobia phobic phocine phoebe phoenix phonal phonate phonation phone phoned

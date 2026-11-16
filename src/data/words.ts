@@ -1253,7 +1253,7 @@ elephant elevate elevated elevator eleven eleventh elfin elflike elflock
 elicit elicited eliciting elicitor elide elided eliding eligibility eligible
 eligibly eliminate elite elixir elliptic elliptical ellipticity elmier
 eloigned eloigner eloined eloiner elongate elope eloped elopement eloper
-eloping eloquence eloquent elude eluded eluder eluding eluting elution
+eloping eloquence eloquent elote elude eluded eluder eluding eluting elution
 elutriate eluvia eluvial eluviate elver elytra elytron elytrum emaciate
 emaciated email emailed emalangeni emanate emanated emanating emanation
 emanative emanator embalm embalmed embalmer embalmment embank embanked

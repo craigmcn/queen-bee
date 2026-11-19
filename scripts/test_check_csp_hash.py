@@ -55,6 +55,14 @@ class CheckCspHashTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn("no inline scripts found", output)
 
+    def test_counts_inline_scripts_with_attributes_but_not_external_ones(self):
+        html = (
+            '<script id="probe">console.log(1)</script>'
+            '<script type="module" src="/main.js"></script>'
+        )
+        (allowed,) = check_csp_hash.inline_script_hashes(PAGE)
+        self.assertEqual(check_csp_hash.inline_script_hashes(html), [allowed])
+
     def test_real_source_page_is_allowed(self):
         root = check_csp_hash.ROOT
         html = (root / "index.html").read_text()

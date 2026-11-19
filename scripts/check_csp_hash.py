@@ -18,7 +18,8 @@ NETLIFY_TOML = ROOT / "netlify.toml"
 
 
 def inline_script_hashes(html):
-    scripts = re.findall(r"<script>(.*?)</script>", html, re.S)
+    # Any <script> without src is inline, whatever its attributes.
+    scripts = re.findall(r"<script\b(?![^>]*\bsrc=)[^>]*>(.*?)</script>", html, re.S)
     return [f"'sha256-{base64.b64encode(hashlib.sha256(s.encode()).digest()).decode()}'" for s in scripts]
 
 

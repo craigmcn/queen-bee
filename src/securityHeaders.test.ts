@@ -14,7 +14,7 @@ async function sha256Base64(text: string): Promise<string> {
 // `\s` before src keeps data-src from counting; HTML names ignore case.
 function inlineScripts(html: string): string[] {
   return [
-    ...html.matchAll(/<script\b(?![^>]*\ssrc\b)[^>]*>(.*?)<\/script>/gis),
+    ...html.matchAll(/<script\b(?![^>]*\ssrc\b)[^>]*>(.*?)<\/script\s*>/gis),
   ].map((match) => match[1]);
 }
 
@@ -36,6 +36,7 @@ describe("Content-Security-Policy", () => {
       '<script id="probe">withId()</script>',
       '<script data-src="x">dataSrc()</script>',
       "<SCRIPT>upper()</SCRIPT>",
+      "<script>spaced()</script >",
       '<script type="module" src="/main.js"></script>',
       '<script src = "/spaced.js"></script>',
       '<script SRC="/upper.js"></script>',
@@ -46,6 +47,7 @@ describe("Content-Security-Policy", () => {
       "withId()",
       "dataSrc()",
       "upper()",
+      "spaced()",
     ]);
   });
 });

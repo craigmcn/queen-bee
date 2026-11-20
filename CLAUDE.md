@@ -113,10 +113,10 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   `nosniff` and `Referrer-Policy`. The inline trailing-slash redirect in
   `index.html` is allowed by its SHA-256 hash; it can't be an external file,
   because it has to run before relative URLs resolve. Editing that script
-  means updating the hash. `src/securityHeaders.test.ts` checks the source page,
-  and CI runs `scripts/check_csp_hash.py dist/index.html` after the build, so
-  a build that changed the script's bytes would fail too. Any
-  new external origin needs adding to the CSP.
+  means updating the hash; `src/securityHeaders.test.ts` fails if they drift.
+  It checks the source page only (Vite leaves the inline script as written),
+  matching `order` and `fivefold`. Any new external origin needs adding to the
+  CSP.
 
 ## Open TODOs
 

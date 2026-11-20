@@ -110,13 +110,13 @@ python3 -m unittest discover scripts  # build-script tests (also run in CI)
   `/queen-bee/` for the craigmcn.com subfolder. No GitHub Pages.
   `netlify.toml` also sets security headers: a strict CSP (`'self'` plus the
   albertcss and Google Fonts origins, which albertcss `@import`s),
-  `nosniff`, `Referrer-Policy` and `Permissions-Policy`. The inline trailing-slash redirect in
-  `index.html` is allowed by its SHA-256 hash; it can't be an external file,
-  because it has to run before relative URLs resolve. Editing that script
-  means updating the hash; `src/securityHeaders.test.ts` fails if they drift.
-  It checks the source page only (Vite leaves the inline script as written),
-  matching `order` and `fivefold`. Any new external origin needs adding to the
-  CSP.
+  `nosniff`, `Referrer-Policy` and `Permissions-Policy`. The inline
+  trailing-slash redirect in `index.html` is allowed by its SHA-256 hash; it
+  can't be an external file, because it has to run before relative URLs
+  resolve. Editing that script means updating the hash;
+  `src/securityHeaders.test.ts` fails if they drift. It checks the source page
+  only (Vite leaves the inline script as written), matching `order` and
+  `fivefold`. Any new external origin needs adding to the CSP.
 
 ## Open TODOs
 

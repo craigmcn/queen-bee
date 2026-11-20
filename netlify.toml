@@ -3,8 +3,8 @@
   publish = "netlify"
 
 # CSP lists only directives that differ from default-src 'self' (albertcss and
-# the Google Fonts it @imports). index.html's inline script must run before the
-# bundle loads, so it's allowed by hash; securityHeaders.test.ts catches drift.
+# its Google Fonts). index.html's inline script must run before the bundle
+# loads, so it's allowed by hash; src/securityHeaders.test.ts catches drift.
 [[headers]]
   for = "/*"
   [headers.values]

@@ -1,12 +1,19 @@
 name: test
 
 on:
-  push:
-    branches: [main]
   pull_request:
   # Lets refresh-words.yml run CI on its PR: PRs opened with GITHUB_TOKEN
   # don't trigger pull_request workflows, but a dispatch does.
   workflow_dispatch:
+  # Weekly run on main replaces the push-to-main run: branch protection requires
+  # PRs to be up to date before merging, so main only gets tested code.
+  schedule:
+    - cron: "17 6 * * 1" # Mondays, 06:17 UTC
+
+# A new push to a PR cancels its in-flight run; runs on main never cancel.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   test:

@@ -78,19 +78,19 @@ aggregative aggrieve aggrieved aggrieving agile agilely agility aging aginner
 agiotage agita agitable agitate agitated agitating agitation agitational
 agitative agitator agitprop aglare agleam aglet aglimmer aglitter aglow
 aglycon agminate agnized agnomina agog agonic agonize agonizing agony agora
-agorae agouti agouty agrafe agraffe agrarian agravic agree agreeable agreeably
-agreed agreeing agreement agrology agronomy aground agrypnia ague aguelike
-agueweed ahead ahem ahoy aide aided aider aidful aiding aidmen aigret aigrette
-aiguille aiguillette aikido ailed aileron ailing ailment aimed aimer aimful
-aimfully aiming aioli airbag airball airboat airborne aircheck aircraft
-aircrew airdate airdrome airdrop airdropped aired airer airfare airfield
-airflow airfoil airframe airglow airhead airheaded airhole airier airily
-airing airlift airlike airline airliner airmail airmailed airmailing airman
-airmen airplane airplay airport airpower airproof airted airthed airthing
-airtight airtime airting airwave airway airwoman airy aiver ajar akimbo akin
-alack alacrity alamode alarm alarmed alarming alarumed albacore albedo albeit
-albino album albumen albumin alburnum alcaide alcayde alcazar alchemy alcidine
-alcohol alcoholic alcoholically alcopop alcove alcoved alder alderfly alderman
+agorae agouti agouty agrafe agraffe agrarian agree agreeable agreeably agreed
+agreeing agreement agrology agronomy aground agrypnia ague aguelike agueweed
+ahead ahem ahoy aide aided aider aidful aiding aidmen aigret aigrette aiguille
+aiguillette aikido ailed aileron ailing ailment aimed aimer aimful aimfully
+aiming aioli airbag airball airboat airborne aircheck aircraft aircrew airdate
+airdrome airdrop airdropped aired airer airfare airfield airflow airfoil
+airframe airglow airhead airheaded airhole airier airily airing airlift
+airlike airline airliner airmail airmailed airmailing airman airmen airplane
+airplay airport airpower airproof airted airthed airthing airtight airtime
+airting airwave airway airwoman airy aiver ajar akimbo akin alack alacrity
+alamode alarm alarmed alarming alarumed albacore albedo albeit albino album
+albumen albumin alburnum alcaide alcayde alcazar alchemy alcidine alcohol
+alcoholic alcoholically alcopop alcove alcoved alder alderfly alderman
 aldermen aleatory alegar aleph alert alerted alerter alertly aleuron aleurone
 alewife alexander alexia alexin alexine alfalfa alfaqui alfaquin alforja alga
 algae algaecide algal algaroba algarroba algebra algerine algicidal algicide
@@ -599,22 +599,22 @@ capri caprice caprifig caprine captain captaincy captaining captcha caption
 captivate captive captivity captor capture capturer capuche capuched capuchin
 capybara carabine carabineer carabiner carabinier carabiniere carabinieri
 caracole caracoled caracolled carafe carageen carambola caramel carapace
-carapax carat carate caravan caravaned caravaner caravaning caravanned
-caravanner caravanning caravel caraway carb carbachol carbamate carbamic
-carbamyl carbanion carbaryl carbide carbine carbolic carbon carbonado
-carbonara carbonic carboy carbuncular carburet carburetter carcanet carcel
-carcinoma card cardamom cardamon cardamum cardboard carded carder cardiac
-cardiae cardigan cardinal carding cardio cardioid care cared careen careened
-careener careening career careered careerer careering carefree careful
-carefuller caregiver carer caret caretake caretaken caretaker caretook
-careworn carex carfare carful cargo carhop caribe caribou caricatural
-caricature caried carillon carinae carinate caring cariole carjacker carked
-carking carle carline carling carload carmaker carmen carmine carnage carnal
-carnally carnation carnauba carnelian carnet carney carnie carnify carnitine
-carnival carnivora carny carob caroche carol caroled caroler carolled caroller
-carom caromed carotene carotid carotin carp carpaccio carpal carpale carpark
-carped carpel carpellary carpellate carpenter carper carpet carpeted carpi
-carping carpool carpooler carpophore carport carrageen carrageenan carrageenin
+carapax carat carate caravan caravaned caravaner caravanned caravanner
+caravanning caravel caraway carb carbachol carbamate carbamic carbamyl
+carbanion carbaryl carbide carbine carbolic carbon carbonado carbonara
+carbonic carboy carbuncular carburet carburetter carcanet carcel carcinoma
+card cardamom cardamon cardamum cardboard carded carder cardiac cardiae
+cardigan cardinal carding cardio cardioid care cared careen careened careener
+careening career careered careerer careering carefree careful carefuller
+caregiver carer caret caretake caretaken caretaker caretook careworn carex
+carfare carful cargo carhop caribe caribou caricatural caricature caried
+carillon carinae carinate caring cariole carjacker carked carking carle
+carline carling carload carmaker carmen carmine carnage carnal carnally
+carnation carnauba carnelian carnet carney carnie carnify carnitine carnival
+carnivora carny carob caroche carol caroled caroler carolled caroller carom
+caromed carotene carotid carotin carp carpaccio carpal carpale carpark carped
+carpel carpellary carpellate carpenter carper carpet carpeted carpi carping
+carpool carpooler carpophore carport carrageen carrageenan carrageenin
 carragheen carrefour carrel carrell carriage carried carrier carriole carrion
 carromed carronade carrot carrotier carrotin carry carryall carrying carryout
 carryover cart cartable cartage carte carted cartel carter cartful carting
